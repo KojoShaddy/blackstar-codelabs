@@ -1,0 +1,18 @@
+{
+  "name": "io-extended-nairobi-codelab",
+  "version": "1.0.0",
+  "description": "Step-by-step interactive codelab web application for I/O Extended Nairobi 2026",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve .",
+    "dev": "npx -y serve ."
+  },
+  "keywords": [
+    "codelab",
+    "workshop",
+    "antigravity",
+    "gemini"
+  ],
+  "author": "I/O Extended Nairobi 2026 Team",
+  "license": "MIT"
+}
