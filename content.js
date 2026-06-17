@@ -59,8 +59,8 @@ window.CODELAB_DATA = {
         <h2>Instructions</h2>
         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
           <li>Open the Antigravity 2.0 interface.</li>
-          <li>Click on <strong>New Project</strong> in the dashboard.</li>
-          <li>Name the project precisely:</li>
+          <li>Click on <strong>File</strong> and then <strong>Create Project</strong>.</li>
+          <li>Name the project folder precisely:</li>
         </ol>
 
         <pre><div class="code-header"><span class="code-lang">Project Name</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>DataOps-Automation</code></pre>
@@ -105,11 +105,12 @@ window.CODELAB_DATA = {
           <li>Open the project settings by clicking the gear icon next to your project title.</li>
           <li>Locate the <strong>Security Settings</strong> section.</li>
           <li>Review the available presets:
-            <ul>
-              <li><strong>Default:</strong> Scoped sandbox restricted to project folders.</li>
-              <li><strong>Full Machine:</strong> Access allowed to standard system files.</li>
-              <li><strong>Unrestricted:</strong> Complete access for administrative scripts.</li>
-            </ul>
+        <ul>
+          <li><strong>Default:</strong> Requires manual review for all terminal commands and file accesses outside of the working folders.</li>
+          <li><strong>Full Machine:</strong> All terminal commands require review. The agent can read or write to any file in the machine.</li>
+          <li><strong>Turbo Mode:</strong> Disables all safety barriers for maximal iteration velocity.</li>
+          <li><strong>Custom:</strong> Manually customize individual settings.</li>
+        </ul>
           </li>
           <li>Leave the project configured with the <strong>Default</strong> preset selected.</li>
         </ol>
@@ -230,7 +231,7 @@ Assume each task can be developed independently.</code></pre>
           <li>Configure the following cron interval schedule:</li>
         </ol>
 
-        <pre><div class="code-header"><span class="code-lang">Interval</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>Every 15 minutes</code></pre>
+        <pre><div class="code-header"><span class="code-lang">Interval</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>*/15 * * * *</code></pre>
 
         <ol start="4" style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
           <li>Use the following prompt content to instruct the agent daemon:</li>
