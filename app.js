@@ -1,4 +1,4 @@
-// Codelab Application Script - Kojo Codelabs
+// Codelab Application Script - Blackstar Codelabs
 
 // State variables
 let currentStepIndex = 0;
@@ -168,7 +168,7 @@ function showHomepage() {
   currentStepIndex = 0;
 
   // Set default page title
-  document.title = "Kojo Codelabs";
+  document.title = "Blackstar Codelabs";
   const headerTitle = document.getElementById("header-title");
   if (headerTitle) headerTitle.textContent = "Interactive Portal";
 
@@ -184,7 +184,7 @@ function renderHomepage() {
 
   homeView.innerHTML = `
     <div class="home-hero">
-      <h1>Explore Kojo Codelabs</h1>
+      <h1>Explore Blackstar Codelabs</h1>
       <p>Interactive, step-by-step programming workshops designed to build code, run autonomous agents, and orchestrate tools safely.</p>
     </div>
 
@@ -300,7 +300,7 @@ function loadCodelab(codelab, stepIdx) {
   if (headerProgress) headerProgress.classList.remove("hidden");
 
   // Set titles
-  document.title = `${codelab.title} | Kojo Codelabs`;
+  document.title = `${codelab.title} | Blackstar Codelabs`;
   const headerTitle = document.getElementById("header-title");
   if (headerTitle) headerTitle.textContent = codelab.title;
 
@@ -665,7 +665,7 @@ window.addEventListener("resize", () => {
 window.shareCodelabCompletion = function() {
   if (!activeCodelab) return;
   const title = encodeURIComponent(activeCodelab.title);
-  const text = encodeURIComponent(`I completed the "${activeCodelab.title}" workshop on Kojo Codelabs! 🚀🔥`);
+  const text = encodeURIComponent(`I completed the "${activeCodelab.title}" workshop on Blackstar Codelabs! 🚀🔥`);
   const url = encodeURIComponent(window.location.origin + window.location.pathname + window.location.hash);
   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
 };

@@ -1,9 +1,9 @@
-// Codelab Content Configuration for Kojo Codelabs
+// Codelab Content Configuration for Blackstar Codelabs
 window.CODELABS_DATA = [
   {
     id: "orchestrating-parallel-agents",
     title: "Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash",
-    author: "Kojo Codelabs Team",
+    author: "Blackstar Codelabs Team",
     category: "Agent Orchestration",
     description: "Learn how to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Antigravity 2.0 and Gemini 3.5 Flash.",
     icon: "🤖",
@@ -13,7 +13,7 @@ window.CODELABS_DATA = [
         title: "Introduction & Overview",
         duration: 5,
         contentHtml: `
-          <p>Welcome to <strong>Kojo Codelabs</strong>! In this hands-on lab, you will learn how to use Antigravity 2.0 to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Gemini 3.5 Flash.</p>
+          <p>Welcome to <strong>Blackstar Codelabs</strong>! In this hands-on lab, you will learn how to use Antigravity 2.0 to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Gemini 3.5 Flash.</p>
         
         <h2>Overview</h2>
         <p>Modern software development is moving beyond AI-assisted coding toward AI-orchestrated workflows. Antigravity 2.0 introduces Projects, Git Worktree support, Scheduled Tasks, JSON Hooks, and enhanced security controls that enable developers to manage complex workflows with multiple agents working in parallel.</p>
@@ -344,7 +344,7 @@ Assume each task can be developed independently.</code></pre>
         <div class="celebration-view">
           <div class="celebration-icon">🎉🚀</div>
           <h1 class="celebration-title">Codelab Completed!</h1>
-          <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Kojo Codelabs.</p>
+          <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Blackstar Codelabs.</p>
           <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
         </div>
 
@@ -373,7 +373,7 @@ Assume each task can be developed independently.</code></pre>
 {
   id: "getting-started-antigravity",
   title: "Getting Started with Antigravity 2.0",
-  author: "Kojo Codelabs Team",
+  author: "Blackstar Codelabs Team",
   category: "Introduction",
   description: "Get up and running with the basics of Antigravity 2.0 and learn about its core concepts.",
   icon: "🚀",
@@ -439,7 +439,7 @@ Assume each task can be developed independently.</code></pre>
 {
   id: "building-mcp-servers",
   title: "Building Custom MCP Servers with Gemini 3.5 Flash",
-  author: "Kojo Codelabs Team",
+  author: "Blackstar Codelabs Team",
   category: "Integrations",
   description: "Write custom Model Context Protocol (MCP) servers to extend your AI agent's capability with custom APIs and local tools.",
   icon: "🔌",
