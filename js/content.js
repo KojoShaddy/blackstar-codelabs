@@ -251,7 +251,7 @@ Assume each task can be developed independently.</code></pre>
             <div class="celebration-icon">🎉🚀</div>
             <h1 class="celebration-title">Codelab Completed!</h1>
             <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Blackstar Codelabs.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
           </div>
 
           <h2>Review Summary</h2>
@@ -318,7 +318,7 @@ Assume each task can be developed independently.</code></pre>
             <div class="celebration-icon">🎉🚀</div>
             <h1 class="celebration-title">Completed!</h1>
             <p class="celebration-text">Fantastic! You have completed the basic intro to Antigravity 2.0. You are now ready for advanced orchestration workflows.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
           </div>
         `
       }
@@ -368,7 +368,7 @@ const server = new McpServer({
             <div class="celebration-icon">🎉🔌</div>
             <h1 class="celebration-title">MCP Setup Complete!</h1>
             <p class="celebration-text">Excellent! You have successfully built and verified a custom MCP server, letting Gemini 3.5 Flash query real-time data securely.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
           </div>
         `
       }
@@ -465,7 +465,7 @@ Then, present this exact message in the chat panel:
             <div class="celebration-icon">🎉📚</div>
             <h1 class="celebration-title">Course Creator Completed!</h1>
             <p class="celebration-text">Congratulations! You have successfully orchestrated a three-tier prompt-driven multi-agent pipeline in Google Antigravity 2.0.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
           </div>
         `
       }

@@ -664,8 +664,6 @@ window.addEventListener("resize", () => {
 // Social Share Callback Function
 window.shareCodelabCompletion = function() {
   if (!activeCodelab) return;
-  const title = encodeURIComponent(activeCodelab.title);
-  const text = encodeURIComponent(`I completed the "${activeCodelab.title}" workshop on Blackstar Codelabs! 🚀🔥`);
   const url = encodeURIComponent(window.location.origin + window.location.pathname + window.location.hash);
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank");
 };
