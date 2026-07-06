@@ -37,7 +37,7 @@ To run a clean local development server on `http://localhost:3000`:
 
 ## 📝 Adding a New Codelab
 
-To add a new codelab to the portal, simply open [content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/blackstar-codelabs/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
+To add a new codelab to the portal, simply open [content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/blackstar-codelabs/js/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
 
 ### Schema Format
 
