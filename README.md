@@ -20,39 +20,6 @@ To run a clean local development server on `http://localhost:3000`:
    npm start
    ```
 
----
-
-## 📝 Adding a New Codelab
-
-To add a new workshop to the portal, open [js/content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/blackstar-codelabs/js/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
-
-### Schema Format
-
-```javascript
-{
-  id: "unique-slug-id",
-  title: "Codelab Title",
-  author: "Author Name",
-  category: "Category Name",
-  description: "A short, engaging description for the card grid.",
-  icon: "🚀", // Emoji icon
-  completionTitle: "Course Title Completed!", // Title shown on the final celebration screen
-  completionMessage: "Congratulations paragraph shown to the user on completion.",
-  steps: [
-    {
-      id: 1,
-      title: "Step Title",
-      duration: 5, // Estimated duration in minutes
-      contentHtml: `
-        <p>Step instructions and technical specifications in HTML...</p>
-      `
-    }
-  ]
-}
-```
-
-
----
 
 ## 📝 License
 
