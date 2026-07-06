@@ -51,12 +51,6 @@ To add a new workshop to the portal, open [js/content.js](file:///c:/Users/Kojo%
 }
 ```
 
----
-
-## 👥 Contributors
-
-- **Shadrack Inusah** ([@KojoShaddy](https://github.com/KojoShaddy)) - Core Developer & Architect
-- **Gabriel Agbobli** ([@gabbyagbobli](https://github.com/gabbyagbobli)) - Course Design & Content Contributor
 
 ---
 
