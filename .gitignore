@@ -6,6 +6,5 @@ node_modules/
 .gemini/
 .idea/
 .vscode/
-.firebase/
 workspace/
 *.txt
