@@ -51,8 +51,8 @@ function setupEventListeners() {
   if (btnNext) {
     btnNext.addEventListener("click", () => {
       if (currentStepIndex === stepsData.length - 1) {
-        // Complete Codelab
-        triggerConfetti();
+        // Complete Codelab -> Show dedicated completion page!
+        showCompletionPage();
       } else {
         navigateToStep(currentStepIndex + 1);
       }
@@ -79,8 +79,8 @@ function setupEventListeners() {
 
   // Keyboard navigation listener (Left/Right arrow keys)
   document.addEventListener("keydown", (e) => {
-    // Only navigate if inside a codelab and not typing in a text field
-    if (!activeCodelab) return;
+    // Only navigate if inside a codelab step and not typing in a text field
+    if (!activeCodelab || window.location.hash.endsWith("/complete")) return;
     if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
       return;
     }
@@ -130,6 +130,29 @@ function handleRouting() {
   if (!hash || hash === "#" || hash === "#home") {
     showHomepage();
     return;
+  }
+
+  // Matches #codelab/{codelabId}/complete
+  const completeMatch = hash.match(/^#codelab\/([^\/]+)\/complete$/);
+  if (completeMatch) {
+    const codelabId = completeMatch[1];
+    const foundCodelab = window.CODELABS_DATA.find(c => c.id === codelabId);
+    if (foundCodelab) {
+      activeCodelab = foundCodelab;
+      activeCodelabId = foundCodelab.id;
+      stepsData = foundCodelab.steps;
+
+      // Show codelab view container, hide homepage
+      const homeView = document.getElementById("home-view");
+      const codelabView = document.getElementById("codelab-view");
+      const headerProgress = document.getElementById("header-progress");
+      if (homeView) homeView.classList.add("hidden");
+      if (codelabView) codelabView.classList.remove("hidden");
+      if (headerProgress) headerProgress.classList.remove("hidden");
+
+      showCompletionPage();
+      return;
+    }
   }
 
   // Matches #codelab/{codelabId}/step/{stepNum}
@@ -298,6 +321,12 @@ function loadCodelab(codelab, stepIdx) {
   if (homeView) homeView.classList.add("hidden");
   if (codelabView) codelabView.classList.remove("hidden");
   if (headerProgress) headerProgress.classList.remove("hidden");
+
+  // Restore sidebar and footer in case we navigated from complete state
+  const sidebar = document.getElementById("sidebar");
+  const footerControls = document.getElementById("footer-controls");
+  if (sidebar) sidebar.classList.remove("hidden");
+  if (footerControls) footerControls.classList.remove("hidden");
 
   // Set titles
   document.title = `${codelab.title} | Blackstar Codelabs`;
@@ -551,6 +580,51 @@ function updateFooterControls() {
       btnNext.style.background = "var(--gradient-primary)";
     }
   }
+}
+
+// Open and render dedicated completion view
+function showCompletionPage() {
+  // Hide sidebar and footer controls
+  const sidebar = document.getElementById("sidebar");
+  const footerControls = document.getElementById("footer-controls");
+  if (sidebar) sidebar.classList.add("hidden");
+  if (footerControls) footerControls.classList.add("hidden");
+
+  // Update window hash state
+  window.location.hash = `#codelab/${activeCodelabId}/complete`;
+
+  // Render centered celebration panel
+  const contentArea = document.getElementById("step-content-area");
+  if (contentArea && activeCodelab) {
+    contentArea.innerHTML = `
+      <div class="celebration-view" style="max-width: 600px; margin: 4rem auto; text-align: center;">
+        <div class="celebration-icon" style="font-size: 5rem; margin-bottom: 2rem;">🎉${activeCodelab.icon || "💻"}</div>
+        <h1 class="celebration-title" style="font-size: 3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem;">
+          ${activeCodelab.completionTitle || (activeCodelab.title + " Completed!")}
+        </h1>
+        <p class="celebration-text" style="font-size: 1.25rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 100%;">
+          ${activeCodelab.completionMessage || "Congratulations on finishing the codelab!"}
+        </p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+          <button class="btn-share" onclick="shareCodelabCompletion()" style="background: var(--gradient-accent); color: white; padding: 1rem 2.5rem; border-radius: var(--border-radius-sm); border: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; cursor: pointer; box-shadow: var(--shadow-md); transition: var(--transition-smooth); width: 100%; max-width: 320px;">
+            Share on LinkedIn
+          </button>
+          <button class="control-btn btn-prev" onclick="window.location.hash='#home'" style="border-color: var(--border-color); color: var(--text-secondary); font-size: 0.95rem; background: transparent; padding: 0.75rem 1.5rem; cursor: pointer; border-radius: var(--border-radius-sm);">
+            ➔ Back to Dashboard
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Smooth transition
+    contentArea.style.opacity = 0;
+    setTimeout(() => {
+      contentArea.style.opacity = 1;
+    }, 100);
+  }
+
+  // Trigger confetti overlay
+  triggerConfetti();
 }
 
 // Copy Code Block functionality

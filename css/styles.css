@@ -369,6 +369,11 @@ body {
   justify-content: center;
 }
 
+#sidebar.hidden + #content-panel {
+  margin-left: 0;
+}
+
+
 .content-inner {
   max-width: 800px;
   width: 100%;

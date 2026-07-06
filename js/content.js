@@ -7,6 +7,8 @@ window.CODELABS_DATA = [
     category: "Agent Orchestration",
     description: "Learn how to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Antigravity 2.0 and Gemini 3.5 Flash.",
     icon: "🤖",
+    completionTitle: "Agent Orchestration Completed!",
+    completionMessage: "Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Blackstar Codelabs.",
     steps: [
       {
         id: 1,
@@ -247,13 +249,6 @@ Assume each task can be developed independently.</code></pre>
         title: "Review & Next Steps",
         duration: 5,
         contentHtml: `
-          <div class="celebration-view">
-            <div class="celebration-icon">🎉🚀</div>
-            <h1 class="celebration-title">Codelab Completed!</h1>
-            <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Blackstar Codelabs.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
-          </div>
-
           <h2>Review Summary</h2>
           <p>In this lab, you successfully completed the following activities:</p>
           <ul>
@@ -283,6 +278,8 @@ Assume each task can be developed independently.</code></pre>
     category: "Introduction",
     description: "Get up and running with the basics of Antigravity 2.0 and learn about its core concepts.",
     icon: "🚀",
+    completionTitle: "Getting Started Completed!",
+    completionMessage: "Fantastic! You have completed the basic intro to Antigravity 2.0. You are now ready for advanced orchestration workflows.",
     steps: [
       {
         id: 1,
@@ -308,19 +305,6 @@ Assume each task can be developed independently.</code></pre>
           <p>Instruct your agent to execute the following simple command:</p>
           <pre><div class="code-header"><span class="code-lang">bash</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>echo "Hello from Antigravity Sandbox"</code></pre>
         `
-      },
-      {
-        id: 3,
-        title: "Codelab Complete!",
-        duration: 5,
-        contentHtml: `
-          <div class="celebration-view">
-            <div class="celebration-icon">🎉🚀</div>
-            <h1 class="celebration-title">Completed!</h1>
-            <p class="celebration-text">Fantastic! You have completed the basic intro to Antigravity 2.0. You are now ready for advanced orchestration workflows.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
-          </div>
-        `
       }
     ]
   },
@@ -331,6 +315,8 @@ Assume each task can be developed independently.</code></pre>
     category: "Integrations",
     description: "Write custom Model Context Protocol (MCP) servers to extend your AI agent's capability with custom APIs and local tools.",
     icon: "🔌",
+    completionTitle: "MCP Setup Complete!",
+    completionMessage: "Excellent! You have successfully built and verified a custom MCP server, letting Gemini 3.5 Flash query real-time data securely.",
     steps: [
       {
         id: 1,
@@ -358,19 +344,6 @@ const server = new McpServer({
   version: "1.0.0"
 });</code></pre>
         `
-      },
-      {
-        id: 3,
-        title: "Verify & Connect",
-        duration: 5,
-        contentHtml: `
-          <div class="celebration-view">
-            <div class="celebration-icon">🎉🔌</div>
-            <h1 class="celebration-title">MCP Setup Complete!</h1>
-            <p class="celebration-text">Excellent! You have successfully built and verified a custom MCP server, letting Gemini 3.5 Flash query real-time data securely.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
-          </div>
-        `
       }
     ]
   },
@@ -381,6 +354,8 @@ const server = new McpServer({
     category: "Agent Orchestration",
     description: "Configure a structured, three-tier multi-agent pipeline in Google Antigravity 2.0 to search, judge, and draft course curricula autonomously.",
     icon: "📚",
+    completionTitle: "Course Creator Completed!",
+    completionMessage: "Congratulations! You have successfully orchestrated a three-tier prompt-driven multi-agent pipeline in Google Antigravity 2.0.",
     steps: [
       {
         id: 1,
@@ -460,13 +435,6 @@ Then, present this exact message in the chat panel:
           <pre><div class="code-header"><span class="code-lang">command</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>Launch the web preview panel for workspace/course_curriculum.md</code></pre>
 
           <p>A polished Preview Window will slide out on the right side of the desktop app, allowing you to read through the structured course, check the formatting, and verify how well the Content Builder integrated the Judge's critiques into the final lesson modules.</p>
-
-          <div class="celebration-view">
-            <div class="celebration-icon">🎉📚</div>
-            <h1 class="celebration-title">Course Creator Completed!</h1>
-            <p class="celebration-text">Congratulations! You have successfully orchestrated a three-tier prompt-driven multi-agent pipeline in Google Antigravity 2.0.</p>
-            <button class="btn-share" onclick="shareCodelabCompletion()">Share on LinkedIn</button>
-          </div>
         `
       }
     ]
