@@ -1,34 +1,21 @@
-# Blackstar Codelabs - Interactive Codelab Portal
+# BlackStar CodeLabs | Practical Google Cloud AI Codelabs
 
-Welcome to **Blackstar Codelabs**! This repository contains a step-by-step interactive portal designed to host multiple technical workshops and codelabs.
-
----
-
-## ✨ Features
-
-- **Scalable Codelab Hub**: A beautiful, premium homepage dashboard displaying all available codelabs with search filters, category tags, and duration estimates.
-- **Dynamic Search & Filtering**: Instantly search through codelabs by title or filter them using categories (e.g. Introduction, Agent Orchestration, Integrations).
-- **Dynamic Navigation & Hash Routing**: Automatically synchronizes the URL hash (e.g. `#codelab/orchestrating-parallel-agents/step-3`) with step contents, supporting browser back/forward buttons and direct step linking.
-- **Auto-Saving Progress**: Syncs checklist completions and active progress to `localStorage` per-codelab. Users can safely refresh without losing their place.
-- **Copy-to-Clipboard Utility**: Integrated copy buttons on code blocks with quick visual feedback state.
-- **Light & Dark Mode**: Modern dark theme by default, toggles to light mode with a smooth visual transition.
-- **Fluid Responsiveness**: Flexbox/Grid architecture that collapses the sidebar into an overlay drawer menu on mobile devices.
-- **Celebration Confetti**: Embedded high-performance canvas particle system triggers once attendees finish the final step of a codelab.
+Welcome to **BlackStar CodeLabs**! This repository hosts a step-by-step interactive portal designed to deliver high-quality, practical workshops and technical codelabs for developers building with Google Cloud AI technologies.
 
 ---
 
 ## 🛠️ Local Development
 
-Since this application is built with standard Vanilla HTML5, CSS3, and ES6 JavaScript, there are **no build steps** or compiler requirements.
+Since the portal is built using standard Vanilla HTML5, CSS3, and ES6 JavaScript, there are no build steps or compiler requirements.
 
-### Option 1: Double-Click
+### Option 1: Static Loading
 Simply double-click the `index.html` file to open and run it directly in any modern web browser.
 
 ### Option 2: Local Web Server (Recommended)
 To run a clean local development server on `http://localhost:3000`:
 
 1. Open your terminal in this directory.
-2. Initialize or run via NPM:
+2. Start the local server:
    ```bash
    npm start
    ```
@@ -37,7 +24,7 @@ To run a clean local development server on `http://localhost:3000`:
 
 ## 📝 Adding a New Codelab
 
-To add a new codelab to the portal, simply open [content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/blackstar-codelabs/js/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
+To add a new workshop to the portal, open [js/content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/blackstar-codelabs/js/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
 
 ### Schema Format
 
@@ -49,24 +36,27 @@ To add a new codelab to the portal, simply open [content.js](file:///c:/Users/Ko
   category: "Category Name",
   description: "A short, engaging description for the card grid.",
   icon: "🚀", // Emoji icon
+  completionTitle: "Course Title Completed!", // Title shown on the final celebration screen
+  completionMessage: "Congratulations paragraph shown to the user on completion.",
   steps: [
     {
       id: 1,
       title: "Step Title",
-      duration: 5, // duration in minutes
+      duration: 5, // Estimated duration in minutes
       contentHtml: `
-        <p>Instructions and content HTML here...</p>
-        
-        <h2>Checklist</h2>
-        <label class="checklist-item">
-          <input type="checkbox" class="checklist-checkbox" data-checklist-id="unique-checklist-item-id">
-          <span class="checklist-text">Perform action item description</span>
-        </label>
+        <p>Step instructions and technical specifications in HTML...</p>
       `
     }
   ]
 }
 ```
+
+---
+
+## 👥 Contributors
+
+- **Kojo Shaddy** - Core Developer & Architect
+- **BlackStar CodeLabs Team** - Course Design & Content Contributors
 
 ---
 
