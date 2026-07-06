@@ -664,6 +664,17 @@ window.addEventListener("resize", () => {
 // Social Share Callback Function
 window.shareCodelabCompletion = function() {
   if (!activeCodelab) return;
-  const url = encodeURIComponent(window.location.origin + window.location.pathname + window.location.hash);
-  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank");
+  const title = activeCodelab.title;
+  const url = window.location.origin + window.location.pathname + window.location.hash;
+  
+  const postTemplate = `🚀 I just completed the "${title}" workshop on Blackstar Codelabs! 💻🔥
+
+In this codelab, I learned how to build and orchestrate autonomous AI agents using Antigravity 2.0 and Gemini 3.5 Flash.
+
+Check out the codelab here: ${url}
+
+#AI #AgenticAI #Antigravity #Gemini #SoftwareEngineering #BlackstarCodelabs`;
+
+  const shareUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postTemplate)}`;
+  window.open(shareUrl, "_blank");
 };
