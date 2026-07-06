@@ -499,5 +499,146 @@ const server = new McpServer({
       `
     }
   ]
+},
+{
+  id: "prompt-driven-multi-agent-course-creator",
+  title: "Building a Prompt-Driven Multi-Agent Course Creator in Antigravity 2.0",
+  author: "Blackstar Codelabs Team",
+  category: "Agent Orchestration",
+  description: "Configure a structured, three-tier multi-agent pipeline in Google Antigravity 2.0 to search, judge, and draft course curricula autonomously.",
+  icon: "📚",
+  steps: [
+    {
+      id: 1,
+      title: "Initializing the Core Multi-Agent Shell",
+      duration: 10,
+      contentHtml: `
+        <p>In this codelab, you will configure a structured, three-tier multi-agent pipeline in Google Antigravity 2.0. The system will build your agent roles and communication guardrails first, pause to accept your chosen topic, and then orchestrate a research, critique, and drafting sequence entirely via natural language prompts.</p>
+        
+        <h2>Instructions</h2>
+        <p>To prevent the agents from running on a blank or default topic, you must first instruct the Antigravity master agent to provision the specialized workspace, assign tool access, and wait for human input.</p>
+
+        <h3>The Agent Configuration Prompt</h3>
+        <p>Copy and enter this prompt into your Antigravity 2.0 chat interface:</p>
+        <pre><div class="code-header"><span class="code-lang">Prompt</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>/goal Initialize a sequential multi-agent workspace with three specialized sub-agents. 
+
+Do not start researching or writing files yet. First, configure and register the following agent roles:
+1. Researcher Agent: Equipped with the \`/browser\` capability to find up-to-date information, extract core facts, and save raw intelligence to \`workspace/raw_research.json\`.
+2. Judge Agent: Assigned to read \`workspace/raw_research.json\`, critique the findings for factual gaps, quality, and completeness, and log a validation report to \`workspace/critique.json\`.
+3. Content Builder Agent: Assigned to take the validated research and the Judge's feedback, resolve any highlighted gaps, and structure the entire output into a beautifully formatted Markdown course curriculum saved as \`workspace/course_curriculum.md\`.
+
+Once this environment shell is fully established and all three agent states are registered, halt execution completely. 
+
+Then, present this exact message in the chat panel:
+"🤖 The Researcher, Judge, and Content Builder agents are fully provisioned and standing by. What topic would you like to build a course for today?"</code></pre>
+
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-init-chat">
+          <span class="checklist-text">Open the Antigravity 2.0 Chat interface</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-paste-prompt">
+          <span class="checklist-text">Copy and submit the setup prompt</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-verify-halt">
+          <span class="checklist-text">Confirm the master agent halts and outputs the confirmation message</span>
+        </label>
+      `
+    },
+    {
+      id: 2,
+      title: "Triggering the Agents with Your Topic",
+      duration: 5,
+      contentHtml: `
+        <p>Once the master agent confirms that your three sub-agents are ready, the system pauses for your input.</p>
+
+        <h2>Instructions</h2>
+        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+          <li>Wait for the agent to display the confirmation prompt.</li>
+          <li>Type your target topic into the prompt bar. For example:</li>
+        </ol>
+
+        <pre><div class="code-header"><span class="code-lang">Topic Prompt</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>The technical architecture of Quantum Computing simulators and their application in cryptography by 2026.</code></pre>
+
+        <ol start="3" style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+          <li>Press Enter. The master orchestrator will feed this topic into the Researcher Agent to kick off the autonomous pipeline.</li>
+        </ol>
+
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-enter-topic">
+          <span class="checklist-text">Type and enter your chosen topic to trigger the pipeline</span>
+        </label>
+      `
+    },
+    {
+      id: 3,
+      title: "Verifying the Multi-Agent Pipeline & Files",
+      duration: 10,
+      contentHtml: `
+        <p>As the agents process your topic, you can verify their collaborative lifecycle in real time through two views:</p>
+
+        <h2>A. The Live Stream Tracing</h2>
+        <p>Watch the chat panel output to confirm that control moves sequentially through your three agents without skipping steps:</p>
+        <ul>
+          <li><code>[Researcher Agent]</code> Initializing web search queries for topic...</li>
+          <li><code>[System Hand-off]</code> Raw data saved. Routing payload to Judge Agent.</li>
+          <li><code>[Judge Agent]</code> Evaluating research quality... Warning: Missing 2026 algorithmic standards. Appending to critique log.</li>
+          <li><code>[System Hand-off]</code> Critique complete. Routing all logs to Content Builder Agent.</li>
+          <li><code>[Content Builder Agent]</code> Synthesizing data, patching missing items, and compilation started...</li>
+        </ul>
+
+        <h2>B. Directory Tree Inspection</h2>
+        <p>Open the integrated file explorer sidebar in your Antigravity workspace to watch the files update live as each agent checks off its task:</p>
+
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-verify-raw">
+          <span class="checklist-text">Verify <code>workspace/raw_research.json</code> appears after the Researcher finishes</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-verify-critique">
+          <span class="checklist-text">Verify <code>workspace/critique.json</code> appears with the Judge's scorecard</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-verify-curriculum">
+          <span class="checklist-text">Verify <code>workspace/course_curriculum.md</code> materializes as the final output</span>
+        </label>
+      `
+    },
+    {
+      id: 4,
+      title: "Launching the Course Preview UI",
+      duration: 5,
+      contentHtml: `
+        <p>To review the finalized course curriculum generated by the system without opening a separate markdown reader, you can use Antigravity's internal rendering engine.</p>
+
+        <h2>Instructions</h2>
+        <p>Type this final command into the prompt bar:</p>
+        <pre><div class="code-header"><span class="code-lang">command</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>Launch the web preview panel for workspace/course_curriculum.md</code></pre>
+
+        <p>A polished Preview Window will slide out on the right side of the desktop app, allowing you to read through the structured course, check the formatting, and verify how well the Content Builder integrated the Judge's critiques into the final lesson modules.</p>
+
+        <div class="celebration-view">
+          <div class="celebration-icon">🎉📚</div>
+          <h1 class="celebration-title">Course Creator Completed!</h1>
+          <p class="celebration-text">Congratulations! You have successfully orchestrated a three-tier prompt-driven multi-agent pipeline in Google Antigravity 2.0.</p>
+          <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+        </div>
+
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-launch-preview">
+          <span class="checklist-text">Execute the markdown preview rendering command</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="cc-verify-preview">
+          <span class="checklist-text">Verify standard lesson modules and critique patches load in the UI panel</span>
+        </label>
+      `
+    }
+  ]
 }
 ];
