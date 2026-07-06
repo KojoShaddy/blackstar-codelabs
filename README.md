@@ -1,21 +1,19 @@
-# I/O Extended Nairobi 2026 - Interactive Codelab Portal
+# Kojo Codelabs - Interactive Codelab Portal
 
-This repository contains the interactive, step-by-step codelab web portal for the workshop **"Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash"** held at I/O Extended Nairobi 2026.
-
-## 🚀 Live Demo
-The portal is deployed live and can be accessed at:  
-**[https://io-ext-nbo-2026.web.app](https://io-ext-nbo-2026.web.app)**
+Welcome to **Kojo Codelabs**! This repository contains a step-by-step interactive portal designed to host multiple technical workshops and codelabs.
 
 ---
 
 ## ✨ Features
 
-- **Dynamic Navigation & Hash Routing**: Automatically synchronizes the URL hash (e.g. `#step-3`) with the step contents, supporting browser back/forward buttons and direct step linking.
-- **Auto-Saving Progress**: Syncs checklist completions and active progress to `localStorage`. If users refresh, they will pick up right where they left off.
-- **Copy-to-Clipboard Utility**: Integrated copy buttons on code blocks with quick visual "Copied!" feedback state.
+- **Scalable Codelab Hub**: A beautiful, premium homepage dashboard displaying all available codelabs with search filters, category tags, and duration estimates.
+- **Dynamic Search & Filtering**: Instantly search through codelabs by title or filter them using categories (e.g. Introduction, Agent Orchestration, Integrations).
+- **Dynamic Navigation & Hash Routing**: Automatically synchronizes the URL hash (e.g. `#codelab/orchestrating-parallel-agents/step-3`) with step contents, supporting browser back/forward buttons and direct step linking.
+- **Auto-Saving Progress**: Syncs checklist completions and active progress to `localStorage` per-codelab. Users can safely refresh without losing their place.
+- **Copy-to-Clipboard Utility**: Integrated copy buttons on code blocks with quick visual feedback state.
 - **Light & Dark Mode**: Modern dark theme by default, toggles to light mode with a smooth visual transition.
 - **Fluid Responsiveness**: Flexbox/Grid architecture that collapses the sidebar into an overlay drawer menu on mobile devices.
-- **Celebration Confetti**: Embedded high-performance canvas particle system triggers once attendees finish the final step.
+- **Celebration Confetti**: Embedded high-performance canvas particle system triggers once attendees finish the final step of a codelab.
 
 ---
 
@@ -24,10 +22,8 @@ The portal is deployed live and can be accessed at:
 ```text
 ├── index.html        # Main HTML layout shell
 ├── styles.css        # Custom HSL design system stylesheet
-├── app.js            # Router logic, progress, storage, and confetti effects
-├── content.js        # Codelab step titles, durations, and HTML instructions
-├── firebase.json     # Firebase hosting rewrite/ignore configurations
-├── .firebaserc       # Firebase target project profile pointer
+├── app.js            # Router logic, progress, storage, homepage rendering, and confetti
+├── content.js        # Codelabs list containing steps, metadata, and HTML contents
 ├── package.json      # NPM start server commands metadata
 └── README.md         # Documentation guide
 ```
@@ -52,26 +48,38 @@ To run a clean local development server on `http://localhost:3000`:
 
 ---
 
-## ☁️ Deployment
+## 📝 Adding a New Codelab
 
-This project is configured for **Firebase Hosting**. To deploy your own copy of the codelab:
+To add a new codelab to the portal, simply open [content.js](file:///c:/Users/Kojo%20Shaddy/Desktop/Shaddy/Web/kojo-codelab/content.js) and append a new codelab object to the `window.CODELABS_DATA` array.
 
-1. Install the Firebase CLI:
-   ```bash
-   npm install -g firebase-tools
-   ```
-2. Authenticate the CLI:
-   ```bash
-   firebase login
-   ```
-3. Set your active Firebase project ID:
-   ```bash
-   firebase use --add YOUR_PROJECT_ID
-   ```
-4. Deploy the files:
-   ```bash
-   firebase deploy --only hosting
-   ```
+### Schema Format
+
+```javascript
+{
+  id: "unique-slug-id",
+  title: "Codelab Title",
+  author: "Author Name",
+  category: "Category Name",
+  description: "A short, engaging description for the card grid.",
+  icon: "🚀", // Emoji icon
+  steps: [
+    {
+      id: 1,
+      title: "Step Title",
+      duration: 5, // duration in minutes
+      contentHtml: `
+        <p>Instructions and content HTML here...</p>
+        
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="unique-checklist-item-id">
+          <span class="checklist-text">Perform action item description</span>
+        </label>
+      `
+    }
+  ]
+}
+```
 
 ---
 

@@ -1,15 +1,19 @@
-// Codelab Content Configuration for I/O Extended Nairobi 2026
-window.CODELAB_DATA = {
-  title: "Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash",
-  author: "I/O Extended Nairobi 2026 Team",
-  category: "Agent Orchestration",
-  steps: [
-    {
-      id: 1,
-      title: "Introduction & Overview",
-      duration: 5,
-      contentHtml: `
-        <p>Welcome to this hands-on lab for <strong>I/O Extended Nairobi 2026</strong>! In this codelab, you will learn how to use Antigravity 2.0 to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Gemini 3.5 Flash.</p>
+// Codelab Content Configuration for Kojo Codelabs
+window.CODELABS_DATA = [
+  {
+    id: "orchestrating-parallel-agents",
+    title: "Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash",
+    author: "Kojo Codelabs Team",
+    category: "Agent Orchestration",
+    description: "Learn how to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Antigravity 2.0 and Gemini 3.5 Flash.",
+    icon: "🤖",
+    steps: [
+      {
+        id: 1,
+        title: "Introduction & Overview",
+        duration: 5,
+        contentHtml: `
+          <p>Welcome to <strong>Kojo Codelabs</strong>! In this hands-on lab, you will learn how to use Antigravity 2.0 to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Gemini 3.5 Flash.</p>
         
         <h2>Overview</h2>
         <p>Modern software development is moving beyond AI-assisted coding toward AI-orchestrated workflows. Antigravity 2.0 introduces Projects, Git Worktree support, Scheduled Tasks, JSON Hooks, and enhanced security controls that enable developers to manage complex workflows with multiple agents working in parallel.</p>
@@ -340,7 +344,7 @@ Assume each task can be developed independently.</code></pre>
         <div class="celebration-view">
           <div class="celebration-icon">🎉🚀</div>
           <h1 class="celebration-title">Codelab Completed!</h1>
-          <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash at I/O Extended Nairobi 2026.</p>
+          <p class="celebration-text">Congratulations! You have successfully configured and executed autonomous agent workflows using Antigravity 2.0 and Gemini 3.5 Flash with Kojo Codelabs.</p>
           <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
         </div>
 
@@ -365,4 +369,135 @@ Assume each task can be developed independently.</code></pre>
       `
     }
   ]
-};
+},
+{
+  id: "getting-started-antigravity",
+  title: "Getting Started with Antigravity 2.0",
+  author: "Kojo Codelabs Team",
+  category: "Introduction",
+  description: "Get up and running with the basics of Antigravity 2.0 and learn about its core concepts.",
+  icon: "🚀",
+  steps: [
+    {
+      id: 1,
+      title: "Introduction & Setup",
+      duration: 5,
+      contentHtml: `
+        <p>Welcome to Antigravity 2.0! Antigravity is a premium, powerful agentic AI coding workspace designed to let AI coordinate development processes securely on your machine.</p>
+        <h2>Key Features</h2>
+        <ul>
+          <li><strong>Isolated Agent Sandbox</strong>: Control exactly what directories and commands the agent can access.</li>
+          <li><strong>Multi-Agent Coordination</strong>: Spawn parallel subagents to solve complex tasks.</li>
+          <li><strong>Git Worktree Support</strong>: Run multiple agents on separate branches in parallel without merge conflicts.</li>
+        </ul>
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="gs-install">
+          <span class="checklist-text">Verify Antigravity 2.0 CLI is installed</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="gs-auth">
+          <span class="checklist-text">Authenticate your workspace agent daemon</span>
+        </label>
+      `
+    },
+    {
+      id: 2,
+      title: "Your First Sandbox Command",
+      duration: 5,
+      contentHtml: `
+        <p>In Antigravity 2.0, terminal commands are ran within a sandboxed executor that prompts you for permission before executing dangerous or modifying commands.</p>
+        <h2>Run Hello World</h2>
+        <p>Instruct your agent to execute the following simple command:</p>
+        <pre><div class="code-header"><span class="code-lang">bash</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>echo "Hello from Antigravity Sandbox"</code></pre>
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="gs-command">
+          <span class="checklist-text">Run the sandboxed echo command</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="gs-approve">
+          <span class="checklist-text">Approve the command in your permission dialog</span>
+        </label>
+      `
+    },
+    {
+      id: 3,
+      title: "Codelab Complete!",
+      duration: 5,
+      contentHtml: `
+        <div class="celebration-view">
+          <div class="celebration-icon">🎉🚀</div>
+          <h1 class="celebration-title">Completed!</h1>
+          <p class="celebration-text">Fantastic! You have completed the basic intro to Antigravity 2.0. You are now ready for advanced orchestration workflows.</p>
+          <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+        </div>
+      `
+    }
+  ]
+},
+{
+  id: "building-mcp-servers",
+  title: "Building Custom MCP Servers with Gemini 3.5 Flash",
+  author: "Kojo Codelabs Team",
+  category: "Integrations",
+  description: "Write custom Model Context Protocol (MCP) servers to extend your AI agent's capability with custom APIs and local tools.",
+  icon: "🔌",
+  steps: [
+    {
+      id: 1,
+      title: "Understanding MCP",
+      duration: 10,
+      contentHtml: `
+        <p>The Model Context Protocol (MCP) defines an open standard for how AI applications securely connect to data sources and local developer tools.</p>
+        <div class="alert alert-info">
+          <span class="alert-icon">💡</span>
+          <div class="alert-content">
+            <strong>Concept:</strong> MCP is designed like a web server for LLM tools. Instead of baking APIs directly into the agent, the agent queries the MCP server to discover what tools are available and how to call them.
+          </div>
+        </div>
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="mcp-read-spec">
+          <span class="checklist-text">Review the Model Context Protocol specification docs</span>
+        </label>
+      `
+    },
+    {
+      id: 2,
+      title: "Implementing a Node.js Server",
+      duration: 10,
+      contentHtml: `
+        <p>Let's create a minimal MCP server in Javascript that registers a custom tool called <code>fetch_weather</code>.</p>
+        <pre><div class="code-header"><span class="code-lang">javascript</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div><code>import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+const server = new McpServer({
+  name: "weather-mcp-server",
+  version: "1.0.0"
+});</code></pre>
+        <h2>Checklist</h2>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="mcp-setup-proj">
+          <span class="checklist-text">Create folder and initialize package.json</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-checklist-id="mcp-install-sdk">
+          <span class="checklist-text">Install @modelcontextprotocol/sdk npm package</span>
+        </label>
+      `
+    },
+    {
+      id: 3,
+      title: "Verify & Connect",
+      duration: 5,
+      contentHtml: `
+        <div class="celebration-view">
+          <div class="celebration-icon">🎉🔌</div>
+          <h1 class="celebration-title">MCP Setup Complete!</h1>
+          <p class="celebration-text">Excellent! You have successfully built and verified a custom MCP server, letting Gemini 3.5 Flash query real-time data securely.</p>
+          <button class="btn-share" onclick="shareCodelabCompletion()">Share on X (Twitter)</button>
+        </div>
+      `
+    }
+  ]
+}
+];

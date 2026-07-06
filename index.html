@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I/O Extended Nairobi 2026 Codelab Portal</title>
-  <meta name="description" content="Official step-by-step codelab follow-along web application for workshops at I/O Extended Nairobi 2026. Built with light/dark theme settings and progress tracking.">
+  <title>Kojo Codelabs</title>
+  <meta name="description" content="Official step-by-step interactive codelab portal. Built with light/dark theme settings, search capability, and progress tracking.">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="https://www.gstatic.com/devrel-devsite/prod/v77bbbb97208df3fb297e68fa70ef7645f778f56f1adcf3607fa68a4175394200/firebase/images/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🚀</text></svg>">
 </head>
 <body>
 
@@ -17,17 +17,17 @@
   <header id="header">
     <div class="header-left">
       <button id="mobile-toggle" class="mobile-nav-toggle" aria-label="Toggle Navigation">☰</button>
-      <div class="header-logo-container">
-        <div class="logo-icon">I/O</div>
+      <div class="header-logo-container" style="cursor: pointer;" onclick="window.location.hash='#home'">
+        <div class="logo-icon">Kojo</div>
         <div class="header-title-wrapper">
-          <span class="header-tag">I/O Extended Nairobi 2026</span>
-          <span id="header-title" class="header-title">Workshop Portal</span>
+          <span class="header-tag">Kojo Codelabs</span>
+          <span id="header-title" class="header-title">Interactive Portal</span>
         </div>
       </div>
     </div>
     <div class="header-right">
       <!-- Codelab Progress Indicators -->
-      <div class="progress-container">
+      <div id="header-progress" class="progress-container">
         <span id="progress-info-text" class="progress-info">0% Complete</span>
         <div class="progress-bar-bg">
           <div id="progress-bar-fill" class="progress-bar-fill"></div>
@@ -46,8 +46,11 @@
   <!-- Sidebar Overlay for mobile screen sizing -->
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
+  <!-- Homepage View Container -->
+  <div id="home-view" class="home-view"></div>
+
   <!-- Main Codelab Shell -->
-  <div class="main-wrapper">
+  <div id="codelab-view" class="main-wrapper">
     <!-- Sidebar Navigation -->
     <aside id="sidebar">
       <div class="sidebar-header">

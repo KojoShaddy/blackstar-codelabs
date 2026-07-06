@@ -1,47 +1,28 @@
-// Codelab Application Script - I/O Extended Nairobi 2026
+// Codelab Application Script - Kojo Codelabs
 
 // State variables
 let currentStepIndex = 0;
 let stepsData = [];
 let checkedItems = {};
+let activeCodelab = null;
+let activeCodelabId = "";
+let currentSearchQuery = "";
+let activeCategoryFilter = "All";
 
 // On DOM Loaded
 document.addEventListener("DOMContentLoaded", () => {
-  initCodelab();
+  initApp();
   initTheme();
   setupEventListeners();
   handleRouting();
 });
 
-// Initialize Codelab from content data
-function initCodelab() {
-  if (!window.CODELAB_DATA) {
+// Initialize App
+function initApp() {
+  if (!window.CODELABS_DATA) {
     console.error("Codelab content data not found. Please verify content.js is loaded.");
     return;
   }
-
-  // Set global title and category
-  document.title = `${window.CODELAB_DATA.title} | Codelab`;
-  const headerTitle = document.getElementById("header-title");
-  if (headerTitle) headerTitle.textContent = window.CODELAB_DATA.title;
-
-  const sidebarCategory = document.getElementById("sidebar-category");
-  if (sidebarCategory) sidebarCategory.textContent = window.CODELAB_DATA.category;
-
-  stepsData = window.CODELAB_DATA.steps;
-
-  // Load checked items progress from localStorage
-  const savedCheckedItems = localStorage.getItem("codelab_checked_items");
-  if (savedCheckedItems) {
-    try {
-      checkedItems = JSON.parse(savedCheckedItems);
-    } catch (e) {
-      checkedItems = {};
-    }
-  }
-
-  // Render Sidebar steps list
-  renderSidebarSteps();
 }
 
 // Initialize Theme (Dark/Light mode)
@@ -98,7 +79,8 @@ function setupEventListeners() {
 
   // Keyboard navigation listener (Left/Right arrow keys)
   document.addEventListener("keydown", (e) => {
-    // Only navigate if user is not typing in a text field
+    // Only navigate if inside a codelab and not typing in a text field
+    if (!activeCodelab) return;
     if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
       return;
     }
@@ -141,6 +123,206 @@ function updateThemeToggleIcon(theme) {
   }
 }
 
+// Handle routing from URL hash values
+function handleRouting() {
+  const hash = window.location.hash;
+
+  if (!hash || hash === "#" || hash === "#home") {
+    showHomepage();
+    return;
+  }
+
+  // Matches #codelab/{codelabId}/step/{stepNum}
+  const match = hash.match(/^#codelab\/([^\/]+)\/step\/(\d+)$/);
+  if (match) {
+    const codelabId = match[1];
+    const stepNum = parseInt(match[2], 10);
+    
+    const foundCodelab = window.CODELABS_DATA.find(c => c.id === codelabId);
+    if (foundCodelab) {
+      loadCodelab(foundCodelab, stepNum - 1);
+      return;
+    }
+  }
+
+  // Fallback to home
+  window.location.hash = "#home";
+}
+
+// Show the homepage view
+function showHomepage() {
+  // Hide codelab workspace
+  const codelabView = document.getElementById("codelab-view");
+  const headerProgress = document.getElementById("header-progress");
+  if (codelabView) codelabView.classList.add("hidden");
+  if (headerProgress) headerProgress.classList.add("hidden");
+
+  // Show home view
+  const homeView = document.getElementById("home-view");
+  if (homeView) homeView.classList.remove("hidden");
+
+  // Reset state variables
+  activeCodelab = null;
+  activeCodelabId = "";
+  stepsData = [];
+  currentStepIndex = 0;
+
+  // Set default page title
+  document.title = "Kojo Codelabs";
+  const headerTitle = document.getElementById("header-title");
+  if (headerTitle) headerTitle.textContent = "Interactive Portal";
+
+  renderHomepage();
+}
+
+// Render the homepage layout
+function renderHomepage() {
+  const homeView = document.getElementById("home-view");
+  if (!homeView) return;
+
+  const categories = ["All", ...new Set(window.CODELABS_DATA.map(c => c.category))];
+
+  homeView.innerHTML = `
+    <div class="home-hero">
+      <h1>Explore Kojo Codelabs</h1>
+      <p>Interactive, step-by-step programming workshops designed to build code, run autonomous agents, and orchestrate tools safely.</p>
+    </div>
+
+    <div class="search-filter-wrapper">
+      <div class="search-input-container">
+        <svg class="search-icon-svg" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="search-bar" class="search-input" placeholder="Search codelabs..." value="${currentSearchQuery}">
+      </div>
+      <div class="filter-pills">
+        <span class="filter-label">Filter:</span>
+        ${categories.map(cat => `
+          <button class="filter-pill ${activeCategoryFilter === cat ? "active" : ""}" data-category="${cat}">${cat}</button>
+        `).join("")}
+      </div>
+    </div>
+
+    <div id="codelabs-grid" class="codelabs-grid"></div>
+  `;
+
+  renderCardsGrid();
+
+  // Attach search and filter event listeners
+  const searchBar = document.getElementById("search-bar");
+  if (searchBar) {
+    searchBar.addEventListener("input", (e) => {
+      currentSearchQuery = e.target.value;
+      renderCardsGrid();
+    });
+
+    if (currentSearchQuery) {
+      searchBar.focus();
+      searchBar.setSelectionRange(currentSearchQuery.length, currentSearchQuery.length);
+    }
+  }
+
+  const pills = document.querySelectorAll(".filter-pill");
+  pills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      pills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      activeCategoryFilter = pill.getAttribute("data-category");
+      renderCardsGrid();
+    });
+  });
+}
+
+// Render filtered codelabs inside grid
+function renderCardsGrid() {
+  const grid = document.getElementById("codelabs-grid");
+  if (!grid) return;
+
+  const filteredCodelabs = window.CODELABS_DATA.filter(codelab => {
+    const matchesSearch = codelab.title.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                          codelab.description.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                          codelab.category.toLowerCase().includes(currentSearchQuery.toLowerCase());
+    const matchesCategory = activeCategoryFilter === "All" || codelab.category === activeCategoryFilter;
+    return matchesSearch && matchesCategory;
+  });
+
+  if (filteredCodelabs.length === 0) {
+    grid.innerHTML = `
+      <div class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h3>No Codelabs Found</h3>
+        <p>Try matching other words or checking category filters.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = filteredCodelabs.map(codelab => {
+    const totalDuration = codelab.steps.reduce((sum, s) => sum + s.duration, 0);
+    const stepCount = codelab.steps.length;
+    return `
+      <div class="codelab-card" data-codelab-id="${codelab.id}">
+        <div class="card-top">
+          <div class="card-icon">${codelab.icon || "💻"}</div>
+          <span class="card-badge">${codelab.category}</span>
+        </div>
+        <h2>${codelab.title}</h2>
+        <p class="card-desc">${codelab.description}</p>
+        <div class="card-meta">
+          <span class="card-duration">⏳ ${totalDuration} mins • ${stepCount} steps</span>
+          <span class="card-author">${codelab.author}</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  const cards = grid.querySelectorAll(".codelab-card");
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-codelab-id");
+      window.location.hash = `#codelab/${id}/step/1`;
+    });
+  });
+}
+
+// Load a specific codelab configuration
+function loadCodelab(codelab, stepIdx) {
+  activeCodelab = codelab;
+  activeCodelabId = codelab.id;
+  stepsData = codelab.steps;
+
+  // Show codelab view, hide homepage
+  const homeView = document.getElementById("home-view");
+  const codelabView = document.getElementById("codelab-view");
+  const headerProgress = document.getElementById("header-progress");
+  if (homeView) homeView.classList.add("hidden");
+  if (codelabView) codelabView.classList.remove("hidden");
+  if (headerProgress) headerProgress.classList.remove("hidden");
+
+  // Set titles
+  document.title = `${codelab.title} | Kojo Codelabs`;
+  const headerTitle = document.getElementById("header-title");
+  if (headerTitle) headerTitle.textContent = codelab.title;
+
+  const sidebarCategory = document.getElementById("sidebar-category");
+  if (sidebarCategory) sidebarCategory.textContent = codelab.category;
+
+  // Load progress namespaces
+  const savedCheckedItems = localStorage.getItem(`codelab_${activeCodelabId}_checked_items`);
+  if (savedCheckedItems) {
+    try {
+      checkedItems = JSON.parse(savedCheckedItems);
+    } catch (e) {
+      checkedItems = {};
+    }
+  } else {
+    checkedItems = {};
+  }
+
+  renderSidebarSteps();
+  navigateToStep(stepIdx, false);
+}
+
 // Render steps items in the sidebar
 function renderSidebarSteps() {
   const listElement = document.getElementById("sidebar-steps-list");
@@ -176,21 +358,6 @@ function renderSidebarSteps() {
   });
 }
 
-// Handle routing from URL hash values
-function handleRouting() {
-  const hash = window.location.hash;
-  let stepIdx = 0;
-
-  if (hash.startsWith("#step-")) {
-    const stepNum = parseInt(hash.replace("#step-", ""), 10);
-    if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= stepsData.length) {
-      stepIdx = stepNum - 1;
-    }
-  }
-
-  navigateToStep(stepIdx, false);
-}
-
 // Navigate to step index
 function navigateToStep(idx, updateHash = true) {
   if (idx < 0 || idx >= stepsData.length) return;
@@ -198,7 +365,7 @@ function navigateToStep(idx, updateHash = true) {
   currentStepIndex = idx;
 
   if (updateHash) {
-    window.location.hash = `step-${idx + 1}`;
+    window.location.hash = `#codelab/${activeCodelabId}/step/${idx + 1}`;
     return; // handleRouting will be called by hashchange listener
   }
 
@@ -280,8 +447,8 @@ function setupCheckboxesInContent() {
         delete checkedItems[checklistId];
       }
 
-      // Save to local storage
-      localStorage.setItem("codelab_checked_items", JSON.stringify(checkedItems));
+      // Save to namespaced local storage
+      localStorage.setItem(`codelab_${activeCodelabId}_checked_items`, JSON.stringify(checkedItems));
 
       // Re-evaluate current step completion state & update metrics
       updateStepCompletionStatus(stepsData[currentStepIndex].id);
@@ -342,6 +509,8 @@ function updateStepCompletionStatus(stepId) {
 
 // Calculate progress percentage and total estimated remaining time
 function updateProgressMetrics() {
+  if (stepsData.length === 0) return;
+  
   // Progress Bar percentage is based on the user's reading position in the steps list
   const progressPercent = stepsData.length > 1 
     ? Math.round((currentStepIndex / (stepsData.length - 1)) * 100) 
@@ -494,8 +663,9 @@ window.addEventListener("resize", () => {
 
 // Social Share Callback Function
 window.shareCodelabCompletion = function() {
-  const title = encodeURIComponent(window.CODELAB_DATA.title);
-  const text = encodeURIComponent(`I completed the "${window.CODELAB_DATA.title}" workshop at I/O Extended Nairobi 2026! 🚀🔥`);
-  const url = encodeURIComponent(window.location.origin + window.location.pathname);
+  if (!activeCodelab) return;
+  const title = encodeURIComponent(activeCodelab.title);
+  const text = encodeURIComponent(`I completed the "${activeCodelab.title}" workshop on Kojo Codelabs! 🚀🔥`);
+  const url = encodeURIComponent(window.location.origin + window.location.pathname + window.location.hash);
   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
 };
