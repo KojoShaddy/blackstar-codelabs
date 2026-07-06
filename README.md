@@ -17,19 +17,6 @@ Welcome to **Kojo Codelabs**! This repository contains a step-by-step interactiv
 
 ---
 
-## 📁 Repository Structure
-
-```text
-├── index.html        # Main HTML layout shell
-├── styles.css        # Custom HSL design system stylesheet
-├── app.js            # Router logic, progress, storage, homepage rendering, and confetti
-├── content.js        # Codelabs list containing steps, metadata, and HTML contents
-├── package.json      # NPM start server commands metadata
-└── README.md         # Documentation guide
-```
-
----
-
 ## 🛠️ Local Development
 
 Since this application is built with standard Vanilla HTML5, CSS3, and ES6 JavaScript, there are **no build steps** or compiler requirements.
