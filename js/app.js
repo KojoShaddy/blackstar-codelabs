@@ -191,7 +191,7 @@ function showHomepage() {
   currentStepIndex = 0;
 
   // Set default page title
-  document.title = "Blackstar Codelabs";
+  document.title = "BlackStar CodeLabs | Practical Google Cloud AI Codelabs";
   const headerTitle = document.getElementById("header-title");
   if (headerTitle) headerTitle.textContent = "Interactive Portal";
 
@@ -329,7 +329,7 @@ function loadCodelab(codelab, stepIdx) {
   if (footerControls) footerControls.classList.remove("hidden");
 
   // Set titles
-  document.title = `${codelab.title} | Blackstar Codelabs`;
+  document.title = `${codelab.title} | BlackStar CodeLabs`;
   const headerTitle = document.getElementById("header-title");
   if (headerTitle) headerTitle.textContent = codelab.title;
 
