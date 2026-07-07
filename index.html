@@ -76,6 +76,124 @@
   <!-- Homepage View Container -->
   <div id="home-view" class="home-view"></div>
 
+  <!-- Admin Panel Container -->
+  <div id="admin-view" class="admin-view hidden">
+    <div class="admin-grid">
+      <!-- Left Panel: Chat Interface -->
+      <div class="admin-chat-panel">
+        <div class="panel-header">
+          <h2>AI Codelab Publisher</h2>
+          <button id="admin-settings-toggle" class="btn-settings-toggle" title="Gemini API Key Settings">⚙️ API Config</button>
+        </div>
+
+        <!-- API Settings Drawer (Toggleable) -->
+        <div id="api-settings-drawer" class="api-settings-drawer hidden">
+          <div class="drawer-inner">
+            <label for="gemini-api-key">Gemini API Key (stored locally):</label>
+            <div class="input-group">
+              <input type="password" id="gemini-api-key" placeholder="Enter GEMINI_API_KEY..." />
+              <button id="btn-save-key" class="btn-primary-sm">Save Key</button>
+            </div>
+            <p class="settings-hint">If left blank, the server compiles content using a local offline parser.</p>
+          </div>
+        </div>
+
+        <!-- Chat history -->
+        <div id="admin-chat-messages" class="admin-chat-messages">
+          <div class="chat-message agent">
+            <div class="avatar">🤖</div>
+            <div class="msg-body">
+              <p>Welcome to the Codelabs AI Publisher! I can parse tutorials and publish them directly to your platform dashboard.</p>
+              <p>Upload a Markdown/text draft, or paste instructions below to start generating steps.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload Dropzone -->
+        <div id="admin-upload-zone" class="admin-upload-zone">
+          <div class="drop-icon">📂</div>
+          <div class="drop-text">Drag & drop your Markdown (.md) or text file here, or click to browse</div>
+          <input type="file" id="admin-file-input" class="hidden-input" accept=".md,.txt,.json" />
+          <div id="admin-file-badge" class="admin-file-badge hidden">
+            <span class="file-name">file.md</span>
+            <button id="btn-remove-file" class="btn-remove-file">×</button>
+          </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="admin-chat-form" class="admin-chat-form">
+          <textarea id="admin-chat-input" placeholder="Type instructions or paste content here..." rows="2" required></textarea>
+          <button type="submit" id="btn-send-message" class="btn-send">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Panel: Codelab Builder & Preview Workspace -->
+      <div class="admin-workspace-panel">
+        <div class="workspace-tabs">
+          <button class="w-tab-btn active" data-tab="preview">Visual Preview</button>
+          <button class="w-tab-btn" data-tab="json">Raw Output</button>
+          <button class="w-tab-btn" data-tab="logs">Publishing logs</button>
+        </div>
+
+        <div class="workspace-tab-contents">
+          <!-- Tab 1: Visual Preview -->
+          <div id="w-tab-preview" class="workspace-tab-content active">
+            <div id="workspace-preview-empty" class="workspace-empty-state">
+              <div class="empty-icon">📝</div>
+              <h3>No Codelab Processed Yet</h3>
+              <p>Submit text or upload files on the left. The parsed codelab preview will appear here.</p>
+            </div>
+            
+            <div id="workspace-preview-loaded" class="workspace-preview-loaded hidden">
+              <div class="codelab-preview-meta">
+                <span id="preview-badge-category" class="card-badge">Category</span>
+                <span id="preview-badge-author" class="preview-author">by Author</span>
+              </div>
+              <h1 id="preview-title" class="preview-title">Codelab Title</h1>
+              <p id="preview-description" class="preview-desc">Codelab description goes here.</p>
+              
+              <div class="steps-section-header">
+                <h3>Structured Step Modules</h3>
+              </div>
+              
+              <div id="preview-steps-accordion" class="steps-accordion">
+                <!-- Step accordions will be dynamically rendered here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Raw JSON -->
+          <div id="w-tab-json" class="workspace-tab-content">
+            <pre class="json-code-block"><code id="preview-json-code">{}</code></pre>
+          </div>
+
+          <!-- Tab 3: Publishing Terminal -->
+          <div id="w-tab-logs" class="workspace-tab-content">
+            <div class="terminal-container">
+              <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">publisher-pipeline.sh</span>
+              </div>
+              <div id="publisher-terminal-logs" class="terminal-body">
+                <div class="log-line text-muted">> Pipeline idle. Waiting for deployment trigger...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="workspace-footer">
+          <button id="btn-publish-codelab" class="btn-publish" disabled>Publish Codelab to Portal 🚀</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Codelab Shell -->
   <div id="codelab-view" class="main-wrapper">
     <!-- Sidebar Navigation -->
@@ -109,5 +227,7 @@
   <script src="js/content.js"></script>
   <!-- Load application control scripts -->
   <script src="js/app.js"></script>
+  <!-- Load admin publisher scripts -->
+  <script src="js/admin.js"></script>
 </body>
 </html>

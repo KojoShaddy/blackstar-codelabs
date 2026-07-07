@@ -1,11 +1,11 @@
 {
-  "name": "io-extended-nairobi-codelab",
+  "name": "blackstar-codelabs",
   "version": "1.0.0",
-  "description": "Step-by-step interactive codelab web application for I/O Extended Nairobi 2026",
+  "description": "Step-by-step interactive codelab web application for Blackstar Codelabs",
   "main": "index.html",
   "scripts": {
-    "start": "npx -y serve .",
-    "dev": "npx -y serve ."
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [
     "codelab",
@@ -13,6 +13,6 @@
     "antigravity",
     "gemini"
   ],
-  "author": "I/O Extended Nairobi 2026 Team",
+  "author": "Kojo Shaddy",
   "license": "MIT"
 }

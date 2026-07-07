@@ -132,6 +132,11 @@ function handleRouting() {
     return;
   }
 
+  if (hash === "#admin") {
+    showAdminPage();
+    return;
+  }
+
   // Matches #codelab/{codelabId}/complete
   const completeMatch = hash.match(/^#codelab\/([^\/]+)\/complete$/);
   if (completeMatch) {
@@ -179,6 +184,10 @@ function showHomepage() {
   const headerProgress = document.getElementById("header-progress");
   if (codelabView) codelabView.classList.add("hidden");
   if (headerProgress) headerProgress.classList.add("hidden");
+
+  // Hide admin view
+  const adminView = document.getElementById("admin-view");
+  if (adminView) adminView.classList.add("hidden");
 
   // Show home view
   const homeView = document.getElementById("home-view");
@@ -314,11 +323,14 @@ function loadCodelab(codelab, stepIdx) {
   activeCodelabId = codelab.id;
   stepsData = codelab.steps;
 
-  // Show codelab view, hide homepage
+  // Show codelab view, hide homepage and admin
   const homeView = document.getElementById("home-view");
   const codelabView = document.getElementById("codelab-view");
   const headerProgress = document.getElementById("header-progress");
+  const adminView = document.getElementById("admin-view");
+  
   if (homeView) homeView.classList.add("hidden");
+  if (adminView) adminView.classList.add("hidden");
   if (codelabView) codelabView.classList.remove("hidden");
   if (headerProgress) headerProgress.classList.remove("hidden");
 
@@ -742,13 +754,39 @@ window.shareCodelabCompletion = function() {
   const url = window.location.origin + window.location.pathname + window.location.hash;
   
   const postTemplate = `🚀 I just completed the "${title}" workshop on Blackstar Codelabs! 💻🔥
-
+ 
 In this codelab, I learned how to build and orchestrate autonomous AI agents using Antigravity 2.0 and Gemini 3.5 Flash.
-
+ 
 Check out the codelab here: ${url}
-
+ 
 #AI #AgenticAI #Antigravity #Gemini #SoftwareEngineering #BlackstarCodelabs`;
-
+ 
   const shareUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postTemplate)}`;
   window.open(shareUrl, "_blank");
 };
+ 
+// Show admin publishing page
+function showAdminPage() {
+  const homeView = document.getElementById("home-view");
+  const codelabView = document.getElementById("codelab-view");
+  const headerProgress = document.getElementById("header-progress");
+  
+  if (homeView) homeView.classList.add("hidden");
+  if (codelabView) codelabView.classList.add("hidden");
+  if (headerProgress) headerProgress.classList.add("hidden");
+ 
+  const adminView = document.getElementById("admin-view");
+  if (adminView) adminView.classList.remove("hidden");
+ 
+  document.title = "AI Codelab Publisher | BlackStar CodeLabs";
+  const headerTitle = document.getElementById("header-title");
+  if (headerTitle) headerTitle.textContent = "AI Publisher Admin";
+ 
+  activeCodelab = null;
+  activeCodelabId = "";
+  stepsData = [];
+  currentStepIndex = 0;
+}
+ 
+// Export global utilities
+window.triggerConfetti = triggerConfetti;

@@ -1,6 +1,30 @@
 // Codelab Content Configuration for Blackstar Codelabs
 window.CODELABS_DATA = [
   {
+    "id": "ai-generated-codelab",
+    "title": "AI Generated Codelab",
+    "author": "Blackstar Local Compiler Agent",
+    "category": "Google Cloud AI",
+    "description": "A tutorial structured by the Local AI Agent parser.",
+    "icon": "⚡",
+    "completionTitle": "AI Generated Codelab Completed!",
+    "completionMessage": "Congratulations! You have completed this step-by-step tutorial published via the Local Compiler Agent.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Generated Tutorial Overview",
+        "duration": 5,
+        "contentHtml": "\n        <p>I parsed your submitted prompt and generated this overview. You requested content about: <em>\" User Prompt: Create a step-by-step tutorial on Vertex AI Pipelines ...\"</em></p>\n        <div class=\"alert alert-info\">\n          <span class=\"alert-icon\">💡</span>\n          <div class=\"alert-content\">\n            <strong>System Advice:</strong> To parse structures automatically with headings and steps, organize your input text using Markdown headers like <code>## Step Title</code> and list items like <code>- [ ] Task checkbox</code>.\n          </div>\n        </div>\n        <h2>Proposed Checklist Tasks</h2>\n        <ul>\n          <li style=\"list-style: none;\"><label class=\"checklist-item\"><input type=\"checkbox\" class=\"checklist-checkbox\" data-checklist-id=\"ai-generated-codelab-setup-run\"><span class=\"checklist-text\">Review generated step contents</span></label></li>\n          <li style=\"list-style: none;\"><label class=\"checklist-item\"><input type=\"checkbox\" class=\"checklist-checkbox\" data-checklist-id=\"ai-generated-codelab-key-run\"><span class=\"checklist-text\">Insert Gemini API Key in the settings panel for advanced formatting</span></label></li>\n        </ul>\n      "
+      },
+      {
+        "id": 2,
+        "title": "Step 2: Command Configuration",
+        "duration": 10,
+        "contentHtml": "\n        <p>This is a secondary step generated from your prompt. Execute this command in your sandbox workspace:</p>\n        <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>npm run start</code></pre>\n        <p>Once started, navigate to your web dashboard to see changes live!</p>\n      "
+      }
+    ]
+  },
+  {
     id: "orchestrating-parallel-agents",
     title: "Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash",
     author: "Blackstar Codelabs Team",
