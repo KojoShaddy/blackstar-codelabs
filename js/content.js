@@ -12,12 +12,18 @@ window.CODELABS_DATA = [
     "steps": [
       {
         "id": 1,
+        "title": "Introduction",
+        "duration": 5,
+        "contentHtml": "\n        <p>Welcome to the <strong>AI Generated Codelab</strong>! In this tutorial, you will explore a step-by-step tutorial structured by the Local AI Agent parser.</p>\n        <h2>Prerequisites</h2>\n        <p>To be successful in this codelab, you should have a basic understanding of software development workflows and executing local server processes.</p>\n        <h2>What you'll learn</h2>\n        <ul>\n          <li>How to review generated step contents for accuracy</li>\n          <li>How to insert Gemini API Keys for advanced formatting</li>\n          <li>How to configure local sandbox environments</li>\n        </ul>\n        <h2>What you'll need</h2>\n        <ul>\n          <li>A Google Cloud Account and Google Cloud Project</li>\n          <li>A web browser such as Chrome</li>\n        </ul>\n      "
+      },
+      {
+        "id": 2,
         "title": "Generated Tutorial Overview",
         "duration": 5,
         "contentHtml": "\n        <p>I parsed your submitted prompt and generated this overview. You requested content about: <em>\" User Prompt: Create a step-by-step tutorial on Vertex AI Pipelines ...\"</em></p>\n        <div class=\"alert alert-info\">\n          <span class=\"alert-icon\">💡</span>\n          <div class=\"alert-content\">\n            <strong>System Advice:</strong> To parse structures automatically with headings and steps, organize your input text using Markdown headers like <code>## Step Title</code> and list items like <code>- [ ] Task checkbox</code>.\n          </div>\n        </div>\n        <h2>Proposed Checklist Tasks</h2>\n        <ul>\n          <li style=\"list-style: none;\"><label class=\"checklist-item\"><input type=\"checkbox\" class=\"checklist-checkbox\" data-checklist-id=\"ai-generated-codelab-setup-run\"><span class=\"checklist-text\">Review generated step contents</span></label></li>\n          <li style=\"list-style: none;\"><label class=\"checklist-item\"><input type=\"checkbox\" class=\"checklist-checkbox\" data-checklist-id=\"ai-generated-codelab-key-run\"><span class=\"checklist-text\">Insert Gemini API Key in the settings panel for advanced formatting</span></label></li>\n        </ul>\n      "
       },
       {
-        "id": 2,
+        "id": 3,
         "title": "Step 2: Command Configuration",
         "duration": 10,
         "contentHtml": "\n        <p>This is a secondary step generated from your prompt. Execute this command in your sandbox workspace:</p>\n        <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>npm run start</code></pre>\n        <p>Once started, navigate to your web dashboard to see changes live!</p>\n      "
@@ -36,7 +42,31 @@ window.CODELABS_DATA = [
     steps: [
       {
         id: 1,
-        title: "Introduction & Overview",
+        title: "Introduction",
+        duration: 5,
+        contentHtml: `
+          <p>Welcome to <strong>Orchestrating Parallel Agents with Antigravity 2.0 and Gemini 3.5 Flash</strong>! Modern software development is moving beyond AI-assisted coding toward AI-orchestrated workflows. Antigravity 2.0 introduces Projects, Git Worktree support, Scheduled Tasks, JSON Hooks, and enhanced security controls that enable developers to manage complex workflows with multiple agents working in parallel.</p>
+          <h2>Prerequisites</h2>
+          <p>To successfully complete this codelab, you should have basic experience with terminal commands, Git, and using AI agents for development tasks.</p>
+          <h2>What you'll learn</h2>
+          <ul>
+            <li>Create and configure a Project in Antigravity 2.0</li>
+            <li>Use Gemini 3.5 Flash to coordinate multiple tasks</li>
+            <li>Leverage Git Worktrees for isolated agent execution</li>
+            <li>Configure Scheduled Tasks for automation</li>
+            <li>Create a JSON Hook to customize agent behavior</li>
+            <li>Understand scoped permissions and security settings</li>
+          </ul>
+          <h2>What you'll need</h2>
+          <ul>
+            <li>Antigravity 2.0 installed and signed in with Google account</li>
+            <li>A web browser such as Chrome</li>
+          </ul>
+        `
+      },
+      {
+        id: 2,
+        title: "Overview & Key Concepts",
         duration: 5,
         contentHtml: `
           <p>Welcome to <strong>Blackstar Codelabs</strong>! In this hands-on lab, you will learn how to use Antigravity 2.0 to coordinate multiple AI agents, automate recurring tasks, and build autonomous workflows using Gemini 3.5 Flash.</p>
@@ -64,7 +94,7 @@ window.CODELABS_DATA = [
         `
       },
       {
-        id: 2,
+        id: 3,
         title: "Create a New Project",
         duration: 10,
         contentHtml: `
@@ -94,7 +124,7 @@ window.CODELABS_DATA = [
         `
       },
       {
-        id: 3,
+        id: 4,
         title: "Explore Project Configuration",
         duration: 5,
         contentHtml: `
@@ -124,7 +154,7 @@ window.CODELABS_DATA = [
         `
       },
       {
-        id: 4,
+        id: 5,
         title: "Create an Autonomous Workflow",
         duration: 10,
         contentHtml: `
@@ -156,7 +186,7 @@ Break the workflow into specialized tasks that can be executed independently.</c
         `
       },
       {
-        id: 5,
+        id: 6,
         title: "Enable Parallel Execution with Worktrees",
         duration: 10,
         contentHtml: `
@@ -184,7 +214,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 6,
+        id: 7,
         title: "Create a Scheduled Task",
         duration: 10,
         contentHtml: `
@@ -218,7 +248,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 7,
+        id: 8,
         title: "Create a JSON Hook",
         duration: 10,
         contentHtml: `
@@ -242,7 +272,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 8,
+        id: 9,
         title: "Test Voice Interaction",
         duration: 5,
         contentHtml: `
@@ -269,7 +299,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 9,
+        id: 10,
         title: "Review & Next Steps",
         duration: 5,
         contentHtml: `
@@ -307,7 +337,28 @@ Assume each task can be developed independently.</code></pre>
     steps: [
       {
         id: 1,
-        title: "Introduction & Setup",
+        title: "Introduction",
+        duration: 5,
+        contentHtml: `
+          <p>Welcome to <strong>Getting Started with Antigravity 2.0</strong>! In this codelab, you will get up and running with the basics of Antigravity 2.0 and learn about its core concepts.</p>
+          <h2>Prerequisites</h2>
+          <p>No prior experience with Antigravity is required. Basic familiarity with command-line tools is helpful.</p>
+          <h2>What you'll learn</h2>
+          <ul>
+            <li>Understanding the Isolated Agent Sandbox</li>
+            <li>Running your first sandboxed command</li>
+            <li>Basic configuration of Antigravity workspaces</li>
+          </ul>
+          <h2>What you'll need</h2>
+          <ul>
+            <li>Antigravity 2.0 installed and signed in with Google account</li>
+            <li>A web browser such as Chrome</li>
+          </ul>
+        `
+      },
+      {
+        id: 2,
+        title: "Overview & Setup",
         duration: 5,
         contentHtml: `
           <p>Welcome to Antigravity 2.0! Antigravity is a premium, powerful agentic AI coding workspace designed to let AI coordinate development processes securely on your machine.</p>
@@ -320,7 +371,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 2,
+        id: 3,
         title: "Your First Sandbox Command",
         duration: 5,
         contentHtml: `
@@ -344,6 +395,27 @@ Assume each task can be developed independently.</code></pre>
     steps: [
       {
         id: 1,
+        title: "Introduction",
+        duration: 5,
+        contentHtml: `
+          <p>Welcome to <strong>Building Custom MCP Servers with Gemini 3.5 Flash</strong>! Write custom Model Context Protocol (MCP) servers to extend your AI agent's capability with custom APIs and local tools.</p>
+          <h2>Prerequisites</h2>
+          <p>Basic knowledge of JavaScript/Node.js and web service APIs is recommended.</p>
+          <h2>What you'll learn</h2>
+          <ul>
+            <li>The architecture of the Model Context Protocol (MCP)</li>
+            <li>How to implement a Node.js MCP server</li>
+            <li>How to register custom tools and query real-time data</li>
+          </ul>
+          <h2>What you'll need</h2>
+          <ul>
+            <li>Antigravity 2.0 installed and signed in with Google account</li>
+            <li>A web browser such as Chrome</li>
+          </ul>
+        `
+      },
+      {
+        id: 2,
         title: "Understanding MCP",
         duration: 10,
         contentHtml: `
@@ -357,7 +429,7 @@ Assume each task can be developed independently.</code></pre>
         `
       },
       {
-        id: 2,
+        id: 3,
         title: "Implementing a Node.js Server",
         duration: 10,
         contentHtml: `
@@ -383,6 +455,27 @@ const server = new McpServer({
     steps: [
       {
         id: 1,
+        title: "Introduction",
+        duration: 5,
+        contentHtml: `
+          <p>Welcome to <strong>Building a Prompt-Driven Multi-Agent Course Creator in Antigravity 2.0</strong>! Learn how to configure a structured, three-tier multi-agent pipeline in Google Antigravity 2.0 to search, judge, and draft course curricula autonomously.</p>
+          <h2>Prerequisites</h2>
+          <p>Familiarity with prompt design and multi-agent systems is helpful, but not required.</p>
+          <h2>What you'll learn</h2>
+          <ul>
+            <li>How to configure a three-tier multi-agent pipeline</li>
+            <li>How to register Researcher, Judge, and Content Builder agent roles</li>
+            <li>How to orchestrate an autonomous research and compilation workflow</li>
+          </ul>
+          <h2>What you'll need</h2>
+          <ul>
+            <li>Antigravity 2.0 installed and signed in with Google account</li>
+            <li>A web browser such as Chrome</li>
+          </ul>
+        `
+      },
+      {
+        id: 2,
         title: "Initializing the Core Multi-Agent Shell",
         duration: 10,
         contentHtml: `
@@ -407,7 +500,7 @@ Then, present this exact message in the chat panel:
         `
       },
       {
-        id: 2,
+        id: 3,
         title: "Triggering the Agents with Your Topic",
         duration: 5,
         contentHtml: `
@@ -427,7 +520,7 @@ Then, present this exact message in the chat panel:
         `
       },
       {
-        id: 3,
+        id: 4,
         title: "Verifying the Multi-Agent Pipeline & Files",
         duration: 10,
         contentHtml: `
@@ -448,7 +541,7 @@ Then, present this exact message in the chat panel:
         `
       },
       {
-        id: 4,
+        id: 5,
         title: "Launching the Course Preview UI",
         duration: 5,
         contentHtml: `

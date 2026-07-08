@@ -1889,4 +1889,40 @@ pre code {
   }
 }
 
+/* Material Icons Sleek Layout Rules */
+.material-symbols-outlined {
+  font-size: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.icon-inline {
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.card-icon .material-symbols-outlined {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+.alert-icon .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+.info-icon {
+  color: var(--accent-color);
+}
+
+.success-icon {
+  color: var(--success-color);
+}
+
+.warning-icon {
+  color: var(--warning-color);
+}
+
 

@@ -281,7 +281,7 @@ function renderCardsGrid() {
   if (filteredCodelabs.length === 0) {
     grid.innerHTML = `
       <div class="no-results">
-        <div class="no-results-icon">🔍</div>
+        <div class="no-results-icon"><span class="material-symbols-outlined" style="font-size: 3rem; color: var(--text-muted);">search_off</span></div>
         <h3>No Codelabs Found</h3>
         <p>Try matching other words or checking category filters.</p>
       </div>
@@ -295,13 +295,13 @@ function renderCardsGrid() {
     return `
       <div class="codelab-card" data-codelab-id="${codelab.id}">
         <div class="card-top">
-          <div class="card-icon">${codelab.icon || "💻"}</div>
+          <div class="card-icon">${replaceEmojisWithIcons(codelab.icon || "💻")}</div>
           <span class="card-badge">${codelab.category}</span>
         </div>
         <h2>${codelab.title}</h2>
         <p class="card-desc">${codelab.description}</p>
         <div class="card-meta">
-          <span class="card-duration">⏳ ${totalDuration} mins • ${stepCount} steps</span>
+          <span class="card-duration"><span class="material-symbols-outlined icon-inline" style="font-size: 1rem; vertical-align: middle; margin-right: 4px;">schedule</span>${totalDuration} mins • ${stepCount} steps</span>
           <span class="card-author">${codelab.author}</span>
         </div>
       </div>
@@ -449,12 +449,12 @@ function renderStepContent() {
       <div class="codelab-step-header">
         <div class="codelab-meta">
           <span class="badge badge-step">Step ${step.id} of ${stepsData.length}</span>
-          <span class="badge badge-time">⏳ ${step.duration} mins remaining</span>
+          <span class="badge badge-time"><span class="material-symbols-outlined icon-inline" style="font-size: 1rem; vertical-align: middle; margin-right: 4px;">schedule</span> ${step.duration} mins remaining</span>
         </div>
         <h1 class="codelab-step-title">${step.title}</h1>
       </div>
       <div class="codelab-step-body">
-        ${step.contentHtml}
+        ${replaceEmojisWithIcons(step.contentHtml)}
       </div>
     `;
 
@@ -570,7 +570,7 @@ function updateProgressMetrics() {
   }
   const badgeTime = document.querySelector(".badge-time");
   if (badgeTime) {
-    badgeTime.textContent = `⏳ ${timeRemaining} mins left`;
+    badgeTime.innerHTML = `<span class="material-symbols-outlined icon-inline" style="font-size: 1rem; vertical-align: middle; margin-right: 4px;">schedule</span> ${timeRemaining} mins left`;
   }
 }
 
@@ -585,10 +585,10 @@ function updateFooterControls() {
 
   if (btnNext) {
     if (currentStepIndex === stepsData.length - 1) {
-      btnNext.innerHTML = `Finish Codelab 🏆`;
+      btnNext.innerHTML = `Finish Codelab <span class="material-symbols-outlined icon-inline" style="vertical-align: middle; margin-left: 4px;">emoji_events</span>`;
       btnNext.style.background = "var(--gradient-accent)";
     } else {
-      btnNext.innerHTML = `Next Step ➔`;
+      btnNext.innerHTML = `Next Step <span class="material-symbols-outlined icon-inline" style="vertical-align: middle; margin-left: 4px;">arrow_forward</span>`;
       btnNext.style.background = "var(--gradient-primary)";
     }
   }
@@ -610,7 +610,10 @@ function showCompletionPage() {
   if (contentArea && activeCodelab) {
     contentArea.innerHTML = `
       <div class="celebration-view" style="max-width: 600px; margin: 4rem auto; text-align: center;">
-        <div class="celebration-icon" style="font-size: 5rem; margin-bottom: 2rem;">🎉${activeCodelab.icon || "💻"}</div>
+        <div class="celebration-icon" style="font-size: 5rem; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined" style="font-size: 5rem; color: #fbbf24;">celebration</span>
+          ${replaceEmojisWithIcons(activeCodelab.icon || "💻")}
+        </div>
         <h1 class="celebration-title" style="font-size: 3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem;">
           ${activeCodelab.completionTitle || (activeCodelab.title + " Completed!")}
         </h1>
@@ -621,8 +624,8 @@ function showCompletionPage() {
           <button class="btn-share" onclick="shareCodelabCompletion()" style="background: var(--gradient-accent); color: white; padding: 1rem 2.5rem; border-radius: var(--border-radius-sm); border: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; cursor: pointer; box-shadow: var(--shadow-md); transition: var(--transition-smooth); width: 100%; max-width: 320px;">
             Share on LinkedIn
           </button>
-          <button class="control-btn btn-prev" onclick="window.location.hash='#home'" style="border-color: var(--border-color); color: var(--text-secondary); font-size: 0.95rem; background: transparent; padding: 0.75rem 1.5rem; cursor: pointer; border-radius: var(--border-radius-sm);">
-            ➔ Back to Dashboard
+          <button class="control-btn btn-prev" onclick="window.location.hash='#home'" style="border-color: var(--border-color); color: var(--text-secondary); font-size: 0.95rem; background: transparent; padding: 0.75rem 1.5rem; cursor: pointer; border-radius: var(--border-radius-sm); display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="font-size: 1.1rem;">dashboard</span> Back to Dashboard
           </button>
         </div>
       </div>
@@ -790,3 +793,28 @@ function showAdminPage() {
  
 // Export global utilities
 window.triggerConfetti = triggerConfetti;
+window.replaceEmojisWithIcons = replaceEmojisWithIcons;
+
+function replaceEmojisWithIcons(htmlStr) {
+  if (!htmlStr) return "";
+  const emojiMap = {
+    "💡": '<span class="material-symbols-outlined alert-symbol info-icon" style="vertical-align: middle;">lightbulb</span>',
+    "✅": '<span class="material-symbols-outlined alert-symbol success-icon" style="vertical-align: middle;">check_circle</span>',
+    "⚠️": '<span class="material-symbols-outlined alert-symbol warning-icon" style="vertical-align: middle;">warning</span>',
+    "🔒": '<span class="material-symbols-outlined alert-symbol lock-icon" style="vertical-align: middle;">lock</span>',
+    "⚡": '<span class="material-symbols-outlined alert-symbol bolt-icon" style="vertical-align: middle;">bolt</span>',
+    "⚙️": '<span class="material-symbols-outlined alert-symbol settings-icon" style="vertical-align: middle;">settings</span>',
+    "🎤": '<span class="material-symbols-outlined alert-symbol mic-icon" style="vertical-align: middle;">mic</span>',
+    "💻": '<span class="material-symbols-outlined alert-symbol computer-icon" style="vertical-align: middle;">computer</span>',
+    "🤖": '<span class="material-symbols-outlined alert-symbol toy-icon" style="vertical-align: middle;">smart_toy</span>',
+    "🚀": '<span class="material-symbols-outlined alert-symbol rocket-icon" style="vertical-align: middle;">rocket_launch</span>',
+    "🔌": '<span class="material-symbols-outlined alert-symbol plugin-icon" style="vertical-align: middle;">extension</span>',
+    "📚": '<span class="material-symbols-outlined alert-symbol book-icon" style="vertical-align: middle;">menu_book</span>'
+  };
+
+  let result = htmlStr;
+  for (const [emoji, iconTag] of Object.entries(emojiMap)) {
+    result = result.replaceAll(emoji, iconTag);
+  }
+  return result;
+}

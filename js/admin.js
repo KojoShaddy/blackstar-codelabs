@@ -221,7 +221,7 @@ function handleChatSubmit() {
   document.getElementById("btn-send-message").disabled = true;
 
   // Append user message
-  const fileLabel = activeFile ? `<div class="attached-file-badge">📂 ${activeFile.name}</div>` : '';
+  const fileLabel = activeFile ? `<div class="attached-file-badge"><span class="material-symbols-outlined icon-inline" style="font-size: 1rem; vertical-align: middle; margin-right: 4px;">draft</span> ${activeFile.name}</div>` : '';
   appendChatMessage("user", `
     <p>${escapeHTML(prompt) || 'Processing uploaded document...'}</p>
     ${fileLabel}
@@ -277,7 +277,7 @@ function handleChatSubmit() {
     currentCodelab = data.data;
     
     appendChatMessage("agent", `
-      <p>✨ Codelab successfully parsed via <strong>${data.method}</strong>!</p>
+      <p><span class="material-symbols-outlined icon-inline" style="font-size: 1.1rem; vertical-align: middle; margin-right: 4px; color: #fbbf24;">auto_awesome</span> Codelab successfully parsed via <strong>${data.method}</strong>!</p>
       <p>I have structured <strong>${currentCodelab.steps.length} steps</strong>. Please review the <strong>Visual Preview</strong> workspace pane and click the publish button when ready.</p>
     `);
 
@@ -342,7 +342,7 @@ function populateWorkspacePreview(codelab) {
       header.innerHTML = `
         <span class="step-num">${step.id}</span>
         <span class="step-title">${escapeHTML(step.title)}</span>
-        <span class="step-time">⏳ ${step.duration} mins</span>
+        <span class="step-time"><span class="material-symbols-outlined icon-inline" style="font-size: 1rem; vertical-align: middle; margin-right: 4px;">schedule</span> ${step.duration} mins</span>
         <span class="accordion-arrow">${idx === 0 ? "▼" : "▶"}</span>
       `;
 
@@ -351,7 +351,7 @@ function populateWorkspacePreview(codelab) {
       body.className = `accordion-body ${idx === 0 ? "active" : ""}`;
       body.innerHTML = `
         <div class="step-preview-inner">
-          ${step.contentHtml}
+          ${window.replaceEmojisWithIcons ? window.replaceEmojisWithIcons(step.contentHtml) : step.contentHtml}
         </div>
       `;
 
@@ -441,9 +441,9 @@ function triggerCodelabPublishing() {
 
       appendChatMessage("agent", `
         <div class="success-alert-box">
-          <h3>🎉 Tutorial Published!</h3>
+          <h3><span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 6px; color: var(--success-color);">celebration</span>Tutorial Published!</h3>
           <p>The codelab <strong>"${currentCodelab.title}"</strong> has been successfully appended to the dataset repository.</p>
-          <a href="#home" class="btn-dashboard-redirect">➔ View Dashboard Codelabs</a>
+          <a href="#home" class="btn-dashboard-redirect" style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1rem;">dashboard</span> View Dashboard Codelabs</a>
         </div>
       `);
       
@@ -484,9 +484,11 @@ function appendChatMessage(sender, htmlContent) {
   messageNode.className = `chat-message ${sender}`;
   messageNode.id = msgId;
 
-  const avatar = sender === "agent" ? "🤖" : "👤";
+  const avatar = sender === "agent" 
+    ? '<span class="material-symbols-outlined" style="font-size: 1.25rem; vertical-align: middle;">smart_toy</span>' 
+    : '<span class="material-symbols-outlined" style="font-size: 1.25rem; vertical-align: middle;">person</span>';
   messageNode.innerHTML = `
-    <div class="avatar">${avatar}</div>
+    <div class="avatar" style="font-size: 1rem; display: flex; align-items: center; justify-content: center;">${avatar}</div>
     <div class="msg-body">
       ${htmlContent}
     </div>

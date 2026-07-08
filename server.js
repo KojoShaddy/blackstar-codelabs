@@ -124,9 +124,15 @@ JSON Schema structure:
   "steps": [
     {
       "id": 1,
-      "title": "Introduction & Setup",
+      "title": "Introduction",
       "duration": 5,
-      "contentHtml": "<p>A detailed paragraph explaining step 1. Use clean HTML nodes only.</p>"
+      "contentHtml": "<p>Overview description of the codelab.</p><h2>Prerequisites</h2><p>Brief prerequisite description.</p><h2>What you'll learn</h2><ul><li>Outcome 1</li><li>Outcome 2</li></ul><h2>What you'll need</h2><ul><li>A Google Cloud Account and Google Cloud Project</li><li>A web browser such as Chrome</li></ul>"
+    },
+    {
+      "id": 2,
+      "title": "First Actual Content Step",
+      "duration": 10,
+      "contentHtml": "<p>A detailed paragraph explaining step 2. Use clean HTML nodes only.</p>"
     }
   ]
 }
@@ -140,7 +146,13 @@ Formatting rules for contentHtml:
    or <div class="alert alert-success"><span class="alert-icon">✅</span><div class="alert-content"><strong>Verify:</strong> verification text</div></div>
    or <div class="alert alert-warning"><span class="alert-icon">⚠️</span><div class="alert-content"><strong>Warning:</strong> alert text</div></div>
 
-Extract all headers, files, instructions, checklists, and structure them into comprehensive steps. If the input is lacking detail, extrapolate a complete, clear, logical developer tutorial matching the user's requirements. Ensure steps are detailed, educational, and complete.`;
+Codelab Step Rules:
+1. The first step (id: 1) MUST ALWAYS be titled \"Introduction\" and follow the format shown in the JSON schema above (including Prerequisites, What you'll learn, and What you'll need sections).
+2. For the \"What you'll need\" section inside Step 1:
+   - If the codelab topic is related to Antigravity, local agents, or coding environments, require: \"Antigravity 2.0 installed and signed in with Google account\" and \"A web browser such as Chrome\".
+   - Otherwise, require: \"A Google Cloud Account and Google Cloud Project\" and \"A web browser such as Chrome\".
+3. All actual content steps parsed from the user input must be shifted and start at step id: 2.
+4. Extract all headers, files, instructions, checklists, and structure them into comprehensive steps. If the input is lacking detail, extrapolate a complete, clear, logical developer tutorial matching the user's requirements. Ensure steps are detailed, educational, and complete.`;
 
   const requestBody = JSON.stringify({
     contents: [{
@@ -307,7 +319,7 @@ function runLocalFallbackParser(text, res) {
           // Checklist support
           if (trimmed.includes('[ ]') || trimmed.includes('[]')) {
             const listText = trimmed.replace(/^-\s*\[\s*\]\s*/, '').replace(/^\*\s*\[\s*\]\s*/, '');
-            html += `<li style="list-style: none;"><label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-checklist-id="${id}-step-${idx+1}-chk-${Math.floor(Math.random()*1000)}"><span class="checklist-text">${listText}</span></label></li>`;
+            html += `<li style="list-style: none;"><label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-checklist-id="${id}-step-${idx+2}-chk-${Math.floor(Math.random()*1000)}"><span class="checklist-text">${listText}</span></label></li>`;
           } else {
             const listText = trimmed.replace(/^-\s*/, '').replace(/^\*\s*/, '');
             html += `<li>${listText}</li>`;
@@ -331,7 +343,7 @@ function runLocalFallbackParser(text, res) {
       if (inList) html += '</ul>';
 
       steps.push({
-        id: idx + 1,
+        id: idx + 2,
         title: heading,
         duration: 5 + (idx * 5),
         contentHtml: html
@@ -340,7 +352,7 @@ function runLocalFallbackParser(text, res) {
   } else {
     // Generates a mock complete codelab if no headers exist
     steps.push({
-      id: 1,
+      id: 2,
       title: "Generated Tutorial Overview",
       duration: 5,
       contentHtml: `
@@ -359,7 +371,7 @@ function runLocalFallbackParser(text, res) {
       `
     });
     steps.push({
-      id: 2,
+      id: 3,
       title: "Step 2: Command Configuration",
       duration: 10,
       contentHtml: `
@@ -369,6 +381,28 @@ function runLocalFallbackParser(text, res) {
       `
     });
   }
+
+  // Prepend Introduction Step
+  const isAntigravity = /antigravity/i.test(title) || /antigravity/i.test(category) || /antigravity/i.test(description);
+  steps.unshift({
+    id: 1,
+    title: "Introduction",
+    duration: 5,
+    contentHtml: `
+      <p>Welcome to the <strong>${title}</strong>! In this tutorial, you will explore a step-by-step developer guide.</p>
+      <h2>Prerequisites</h2>
+      <p>Basic programming knowledge and familiarity with software development concepts is recommended.</p>
+      <h2>What you'll learn</h2>
+      <ul>
+        ${headings.length > 0 ? headings.map(h => `<li>${h}</li>`).join('\n        ') : '<li>Review generated step contents</li>\n        <li>Configure command settings and insert Gemini API Key</li>'}
+      </ul>
+      <h2>What you'll need</h2>
+      <ul>
+        <li>${isAntigravity ? 'Antigravity 2.0 installed and signed in with Google account' : 'A Google Cloud Account and Google Cloud Project'}</li>
+        <li>A web browser such as Chrome</li>
+      </ul>
+    `
+  });
 
   const codelabData = {
     id,
