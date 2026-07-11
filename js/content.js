@@ -1,6 +1,72 @@
 // Codelab Content Configuration for Blackstar Codelabs
 window.CODELABS_DATA = [
   {
+    "id": "building-intelligent-ai-agents-with-antigravity-ide-and-google-agent-development-kit-adk",
+    "title": "Building Intelligent AI Agents with Antigravity IDE and Google Agent Development Kit (ADK)",
+    "author": "Blackstar Codelabs Team",
+    "category": "Google Cloud AI",
+    "description": "Learn how to build, run, and interact with AI agents using the Google ADK Python framework in Antigravity IDE.",
+    "icon": "🛠️",
+    "completionTitle": "Google ADK Codelab Completed!",
+    "completionMessage": "Congratulations! You have completed the Google Agent Development Kit (ADK) tutorial and successfully run your agent.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Introduction",
+        "duration": 5,
+        "contentHtml": "\n          <p>Welcome to the <strong>Google Agent Development Kit (ADK) Codelab</strong>! In this tutorial, you will learn how to build, run, and interact with AI agents using the Google ADK Python framework.</p>\n          <h2>Prerequisites</h2>\n          <p>To be successful in this codelab, you should have a basic understanding of Python programming and executing local scripts.</p>\n          <h2>What you'll learn</h2>\n          <ul>\n            <li>How to set up a virtual environment and install the google-adk package.</li>\n            <li>How to scaffold a new agent using the ADK CLI.</li>\n            <li>How to configure API credentials and customize agent instructions.</li>\n            <li>How to run and interact with your agent via terminal CLI or web UI.</li>\n          </ul>\n          <h2>What you'll need</h2>\n          <ul>\n            <li>Antigravity IDE installed and signed in with Google account</li>\n            <li>A web browser such as Chrome</li>\n          </ul>\n        "
+      },
+      {
+        "id": 2,
+        "title": "Introduction to Google ADK",
+        "duration": 5,
+        "contentHtml": "\n          <p>The <strong>Google Agent Development Kit (ADK)</strong> is an open-source, code-first Python framework designed for building, testing, and deploying reliable AI agents at scale.</p>\n          <h2>Key advantages of ADK:</h2>\n          <ul>\n            <li><strong>Simplicity:</strong> Easily define agent instructions, tools, and models in Python.</li>\n            <li><strong>Interoperability:</strong> Seamlessly switch between Google AI (Gemini Developer API) and Vertex AI backends.</li>\n            <li><strong>Built-in tools:</strong> Ships with a built-in interactive CLI runner and a FastAPI web UI.</li>\n          </ul>\n        "
+      },
+      {
+        "id": 3,
+        "title": "Prerequisites & Environment Setup",
+        "duration": 10,
+        "contentHtml": "\n          <p>ADK requires <strong>Python 3.10+</strong>. Follow these steps to prepare your workspace and directory structure:</p>\n          <h2>Step A: Workspace Setup in Antigravity IDE</h2>\n          <ol>\n            <li>Open the <strong>Antigravity IDE</strong>.</li>\n            <li>Click on <strong>File</strong> &gt; <strong>Open Folder</strong> (or click <strong>Open Folder</strong> on the welcome screen).</li>\n            <li>Create a new directory named <code>Agent</code> on your local system (e.g., on your Desktop) and select it to open the workspace.</li>\n            <li>Open the integrated terminal in the IDE (go to <strong>Terminal</strong> &gt; <strong>New Terminal</strong> or press <code>Ctrl + `</code>).</li>\n          </ol>\n          <h2>Step B: Initialize a Virtual Environment</h2>\n          <p>Using a virtual environment prevents package name collisions (like the common mistake of installing <code>adk</code> instead of <code>google-adk</code>).</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code># Create the virtual environment\npython -m venv .venv\n\n# Activate the virtual environment\n# On Windows (Command Prompt):\n.venv\\Scripts\\activate.bat\n\n# On Windows (PowerShell):\n.\\.venv\\Scripts\\Activate.ps1\n\n# On macOS/Linux:\nsource .venv/bin/activate</code></pre>\n          <h2>Step C: Install the Correct SDK Package</h2>\n          <p>Run the following command to download and install the official Agent Development Kit package:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>pip install google-adk</code></pre>\n          <div class=\"alert alert-warning\">\n            <span class=\"alert-icon\">⚠️</span>\n            <div class=\"alert-content\">\n              <strong>Warning:</strong> Do NOT run <code>pip install adk</code>. This installs an unrelated RPC development library that conflicts with the Google ADK commands.\n            </div>\n          </div>\n        "
+      },
+      {
+        "id": 4,
+        "title": "Scaffolding a New Agent",
+        "duration": 5,
+        "contentHtml": "\n          <p>To automatically generate the boilerplate files for your agent, run:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>adk create my_agent</code></pre>\n          <p>During this command, the CLI prompts you:</p>\n          <ol>\n            <li><strong>Choose a model</strong>: Select <code>1</code> for <code>gemini-3.5-flash</code>.</li>\n            <li><strong>Choose a backend</strong>: Select <code>1</code> for <code>Google AI</code>.</li>\n            <li><strong>Google API Key</strong>: Enter your key (or enter a placeholder and modify it later).</li>\n          </ol>\n          <div class=\"alert alert-info\">\n            <span class=\"alert-icon\">💡</span>\n            <div class=\"alert-content\">\n              <strong>Note:</strong> On Windows, if the command crashes at the very end with a <code>UnicodeEncodeError</code>, don't worry. This is a display formatting bug caused by console emojis. The files are still successfully created under the <code>my_agent</code> folder.\n            </div>\n          </div>\n        "
+      },
+      {
+        "id": 5,
+        "title": "Exploring the Agent Structure",
+        "duration": 5,
+        "contentHtml": "\n          <p>Navigate to your newly created directory to find the following files:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">text</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>my_agent/\n├── .env          # Stores credentials and API configuration\n├── .gitignore    # Prevents sensitive credentials (.env) from being committed\n├── __init__.py   # Marks the directory as a Python package\n└── agent.py      # Main file defining the agent logic</code></pre>\n          <h2>The Agent Definition (<code>agent.py</code>)</h2>\n          <p>Open <code>my_agent/agent.py</code>. By default, it initializes a basic agent:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">python</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>from google.adk.agents.llm_agent import Agent\n\nroot_agent = Agent(\n    model='gemini-3.5-flash',\n    name='root_agent',\n    description='A helpful assistant for user questions.',\n    instruction='Answer user questions to the best of your knowledge',\n)</code></pre>\n        "
+      },
+      {
+        "id": 6,
+        "title": "Configuring API Credentials",
+        "duration": 5,
+        "contentHtml": "\n          <p>Open <code>my_agent/.env</code>. It should look like this:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">ini</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>GOOGLE_GENAI_USE_ENTERPRISE=0\nGOOGLE_API_KEY=YOUR_GEMINI_API_KEY</code></pre>\n          <p>Replace <code>YOUR_GEMINI_API_KEY</code> with a valid Gemini API key from <a href=\"https://aistudio.google.com/apikey\" target=\"_blank\">Google AI Studio</a>.</p>\n        "
+      },
+      {
+        "id": 7,
+        "title": "Running Your Agent",
+        "duration": 10,
+        "contentHtml": "\n          <p>Make sure your virtual environment is active, and then choose one of the options below to interact with your agent.</p>\n          <h2>Method A: Terminal CLI</h2>\n          <p>You can test your agent directly in the console using:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code># Set console encoding to UTF-8 on Windows to avoid emoji errors\nexport PYTHONIOENCODING=\"utf-8\"\n\n# Run in interactive CLI mode\nadk run my_agent</code></pre>\n          <p>You will see an interactive prompt where you can chat directly with your agent.</p>\n          <h2>Method B: Interactive Web UI</h2>\n          <p>ADK has a built-in FastAPI web server that provides a clean chat UI.</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">bash</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code># Start the web UI server\nadk web my_agent</code></pre>\n          <ul>\n            <li>By default, the server runs on <code>http://127.0.0.1:8000</code>.</li>\n            <li>Open your browser, navigate to the URL, and start chatting with the agent!</li>\n          </ul>\n        "
+      },
+      {
+        "id": 8,
+        "title": "Enhancing the Agent (Adding Custom Logic)",
+        "duration": 10,
+        "contentHtml": "\n          <p>You can modify the agent's instructions or logic. For instance, to give the agent awareness of time, import the <code>datetime</code> library and append a rule to its instructions.</p>\n          <p>Modify <code>my_agent/agent.py</code> to match the following:</p>\n          <pre><div class=\"code-header\"><span class=\"code-lang\">python</span><button class=\"btn-copy\" onclick=\"copyCode(this)\">Copy</button></div><code>from datetime import datetime\nfrom google.adk.agents.llm_agent import Agent\n\n# Get current system time to inject\ncurrent_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n\nroot_agent = Agent(\n    model='gemini-3.5-flash',\n    name='root_agent',\n    description='A helpful assistant for user questions.',\n    instruction=f'Answer user questions to the best of your knowledge. The current time is {current_time}. Always keep answers concise.',\n)</code></pre>\n          <p>Restart the agent (<code>adk run my_agent</code> or <code>adk web my_agent</code>) and ask: <em>\"What time is it?\"</em> to confirm it utilizes your custom time injection.</p>\n        "
+      },
+      {
+        "id": 9,
+        "title": "Conclusion & Next Steps",
+        "duration": 5,
+        "contentHtml": "\n          <h2>Review Summary</h2>\n          <p>Congratulations! You have successfully configured and run your first Google ADK agent.</p>\n          <p>To continue building:</p>\n          <ol>\n            <li><strong>Add Tools:</strong> Integrate functions for the agent to call by using python functions.</li>\n            <li><strong>Multi-Agent Systems:</strong> Connect multiple agents together by adding sub-agents.</li>\n            <li><strong>Deploy:</strong> Package your agent to run in production using <code>Google Cloud Run</code>, <code>Google App Engine</code>, <code>Google Kubernetes Engine</code>, or <code>Google Compute Engine</code>.</li>\n          </ol>\n          <p>Refer to the official documentation on the <a href=\"https://github.com/KojoShaddy/my_agent\" target=\"_blank\">Google ADK GitHub Repository</a> for more advanced tutorials.</p>\n        "
+      }
+    ]
+  },
+  {
     "id": "ai-generated-codelab",
     "title": "AI Generated Codelab",
     "author": "Blackstar Local Compiler Agent",
