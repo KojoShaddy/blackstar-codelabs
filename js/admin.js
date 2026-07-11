@@ -4,6 +4,14 @@ let activeFile = null;
 let currentCodelab = null;
 let isProcessing = false;
 
+// Helper to resolve API URLs (enables fetching from file:// protocols to localhost)
+function getApiUrl(endpoint) {
+  if (window.location.protocol === 'file:') {
+    return `http://localhost:3000${endpoint}`;
+  }
+  return endpoint;
+}
+
 // DOM Elements
 document.addEventListener("DOMContentLoaded", () => {
   initAdmin();
@@ -251,7 +259,7 @@ function handleChatSubmit() {
   };
 
   // POST query to Server
-  fetch("/api/chat", {
+  fetch(getApiUrl("/api/chat"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -415,7 +423,7 @@ function triggerCodelabPublishing() {
 
   // Call server to write code
   setTimeout(() => {
-    fetch("/api/publish", {
+    fetch(getApiUrl("/api/publish"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -23,6 +23,18 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   const urlPath = req.url.split('?')[0];
 
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
   // API Route: AI Chat Parser
   if (req.method === 'POST' && urlPath === '/api/chat') {
     handleChatApi(req, res);
